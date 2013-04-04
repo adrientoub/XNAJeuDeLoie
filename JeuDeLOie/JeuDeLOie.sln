@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeuDeLOie", "JeuDeLOie\JeuDeLOie\JeuDeLOie.csproj", "{2B4E2279-6442-4BF3-8FBC-5E265368F47F}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "JeuDeLOieContent", "JeuDeLOie\JeuDeLOieContent\JeuDeLOieContent.contentproj", "{665A6FF6-AECA-45BD-A54A-92E6ADA513C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeuDeLOieContent", "JeuDeLOie\JeuDeLOieContent\JeuDeLOieContent.contentproj", "{665A6FF6-AECA-45BD-A54A-92E6ADA513C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

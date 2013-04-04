@@ -108,7 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Case.cs" />
+    <Compile Include="ContentLoad.cs" />
     <Compile Include="Evenements.cs" />
+    <Compile Include="GameData.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Plateau.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

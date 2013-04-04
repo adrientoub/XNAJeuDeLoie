@@ -19,10 +19,15 @@ namespace JeuDeLOie
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Plateau plate;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+            graphics.PreferredBackBufferHeight = GameData.PreferredBackBufferHeight;
+            graphics.PreferredBackBufferWidth = GameData.PreferredBackBufferWidth;
         }
 
         /// <summary>
@@ -34,6 +39,7 @@ namespace JeuDeLOie
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -47,6 +53,10 @@ namespace JeuDeLOie
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            GameData.Content = Content;
+            GameData.SpriteBatch = spriteBatch;
+            ContentLoad.Load();
+            plate = new Plateau();
             // TODO: use this.Content to load your game content here
         }
 
@@ -69,9 +79,12 @@ namespace JeuDeLOie
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            GameData.MouseState = Mouse.GetState();
 
             // TODO: Add your update logic here
+            plate.Update();
 
+            GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);
         }
 
@@ -81,9 +94,10 @@ namespace JeuDeLOie
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            GraphicsDevice.Clear(Color.Indigo);
+            spriteBatch.Begin();
+            plate.Draw();
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
