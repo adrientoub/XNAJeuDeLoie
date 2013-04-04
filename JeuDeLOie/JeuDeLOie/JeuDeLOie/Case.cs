@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace JeuDeLOie
 {
-    class Case
+    public class Case
     {
         #region FIELDS
         Event evenement;

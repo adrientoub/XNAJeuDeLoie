@@ -19,7 +19,9 @@ namespace JeuDeLOie
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Plateau plate;
+        public static Plateau plate;
+        int tourActuel;
+        Joueur[] joueurs;
 
         public Game1()
         {
@@ -39,7 +41,13 @@ namespace JeuDeLOie
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
+            joueurs = new Joueur[4];
+            for (int i = 0; i < joueurs.Length; i++)
+			{
+                joueurs[i] = new Joueur(i, "");
+			}
+                
+            tourActuel = 0;
 
             base.Initialize();
         }
@@ -83,6 +91,13 @@ namespace JeuDeLOie
 
             // TODO: Add your update logic here
             plate.Update();
+            // La boucle de jeu ici :)
+            // modifier le tour actuel et tout
+
+            foreach (var j in joueurs)
+            {
+                j.Update(tourActuel);
+            }
 
             GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);

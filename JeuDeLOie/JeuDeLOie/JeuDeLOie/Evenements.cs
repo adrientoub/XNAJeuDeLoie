@@ -21,5 +21,15 @@ namespace JeuDeLOie
 
     class Evenements
     {
+        Event e;
+        public Event E
+        {
+            get { return e; }
+        }
+
+        public Evenements(Event e)
+        {
+            this.e = e;
+        }
     }
 }

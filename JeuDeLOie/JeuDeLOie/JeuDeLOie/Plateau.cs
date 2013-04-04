@@ -15,7 +15,7 @@ namespace JeuDeLOie
         Haut,
     }
 
-    class Plateau
+    public class Plateau
     {
         #region FIELDS
         Case[] tab;
