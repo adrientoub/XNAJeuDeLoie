@@ -32,7 +32,7 @@ namespace JeuDeLOie
         public void RollDice()
         {
             isRolling = true;
-            jet = GameData.Random.Next(10, 15);
+            jet = GameData.Random.Next(20, 42);
             Timer = 1;
         }
         #endregion
@@ -43,14 +43,17 @@ namespace JeuDeLOie
 
         public void Update()// sera appelé seulement si le dé est en train de rouler
         {
-            Timer++;
-            if (jet != i && (Timer % 5 == 0)) // permet que i ne change pas à tous les update, laissant plus de suspense..
+            if (isRolling)
             {
-                result = GameData.Random.Next(1, 7);
-                i++;
+                Timer++;
+                if (jet > i && (Timer % 7 == 0)) // permet que i ne change pas à tous les update, laissant plus de suspense..
+                {
+                    result = GameData.Random.Next(1, 7);
+                    i++;
+                }
+                else if (jet == i)
+                    isRolling = false;
             }
-            else if (jet == i)
-                isRolling = false;
         }
 
 
@@ -69,7 +72,7 @@ namespace JeuDeLOie
         static List<Dice> dices;
         Dice d1, d2;
         int Result;
-        bool isRolling;
+        bool isRolling, isInit;
         Rectangle position, position2; // position2 est celle du deuxième dé
         #endregion
 
@@ -84,6 +87,7 @@ namespace JeuDeLOie
             d1.InitDice();
             d2 = new Dice();
             d2.InitDice();
+            isInit = true;
         }
         #endregion
 
@@ -91,6 +95,7 @@ namespace JeuDeLOie
         public void ReInit()
         {
             d1.ReInit(); d2.ReInit();
+            isInit = true;
         }
 
         public void RollDices()
@@ -98,6 +103,7 @@ namespace JeuDeLOie
             isRolling = true;
             d1.RollDice();
             d2.RollDice();
+            isInit = false;
         }
 
         /// <summary>
@@ -116,9 +122,9 @@ namespace JeuDeLOie
             // pour l'instant, on lance les dés avec clic gauche, à modif sur un bouton
             if (GameData.MouseState.LeftButton == ButtonState.Pressed
                 && GameData.PreviousMouseState != GameData.MouseState
-                && !isRolling)
+                && !isRolling && isInit)
             { RollDices(); }
-            // et on reinit avec clic droit
+            // et on reinit avec clic droit // ceci devra être fait seulement lorsqu'on voudra relancer les dés
             if (GameData.MouseState.RightButton == ButtonState.Pressed
                 && GameData.PreviousMouseState != GameData.MouseState
                 && !isRolling)
@@ -127,7 +133,7 @@ namespace JeuDeLOie
             if (isRolling)
             {
                 d1.Update(); d2.Update();
-                isRolling = d1.isRolling && d2.isRolling;
+                isRolling = d1.isRolling || d2.isRolling;
                 if (!isRolling)
                 { NewResult(); }
             }
