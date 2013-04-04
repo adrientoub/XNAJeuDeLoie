@@ -22,6 +22,7 @@ namespace JeuDeLOie
         public static Plateau plate;
         int tourActuel;
         Joueur[] joueurs;
+        Dices des;
 
         public Game1()
         {
@@ -48,7 +49,8 @@ namespace JeuDeLOie
 			}
                 
             tourActuel = 0;
-
+            des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - GameData.PreferredBackBufferWidth / 4,
+                GameData.PreferredBackBufferHeight - GameData.PreferredBackBufferHeight / 4, 75, 75));
             base.Initialize();
         }
 
@@ -99,6 +101,8 @@ namespace JeuDeLOie
                 j.Update(tourActuel);
             }
 
+            des.Update();
+
             GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);
         }
@@ -112,6 +116,7 @@ namespace JeuDeLOie
             GraphicsDevice.Clear(Color.Indigo);
             spriteBatch.Begin();
             plate.Draw();
+            des.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);
