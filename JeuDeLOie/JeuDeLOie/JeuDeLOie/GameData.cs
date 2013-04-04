@@ -22,5 +22,7 @@ namespace JeuDeLOie
 
         public static int PreferredBackBufferHeight = 9 * 80;
         public static int PreferredBackBufferWidth = 16 * 80;
+
+        public static Random Random = new Random();
     }
 }

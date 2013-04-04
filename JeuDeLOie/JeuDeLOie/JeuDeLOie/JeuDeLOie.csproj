@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Case.cs" />
     <Compile Include="ContentLoad.cs" />
+    <Compile Include="Dices.cs" />
     <Compile Include="Evenements.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Joueur.cs" />
