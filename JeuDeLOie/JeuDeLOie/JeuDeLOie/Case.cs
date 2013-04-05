@@ -29,7 +29,7 @@ namespace JeuDeLOie
         {
             this.evenement = evenement;
             Numero = numero;
-            infos = "Case number " + Numero + "\nInformations : ";
+            infos = "Case number " + Numero + "\n\nInformations : ";
             InitInfos();
             this.position = position;
             color = Color.White;
@@ -54,11 +54,11 @@ namespace JeuDeLOie
                     break;
                 case Event.Hotel:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 2, GameData.CaseHeight * 0, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Hôtel\nOuhlàlà, les bonnes choses à manger du buffet et les lits douillets ! \n  Vous devez passer 2 tours si vous vous arrêtez ici.";
+                    infos += "Case Hôtel\n  Ouhlàlà, des bonnes choses à manger \n  au buffet et des lits douillets ! \n  Vous devez passer 2 tours si vous\n  vous arrêtez ici.";
                     break;
                 case Event.Labyrinthe:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 3, GameData.CaseHeight * 0, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Labyrinthe\n  C'était à gauche qu'il fallait prendre ! Vous vous êtes perdu. \n  Retournez donc à la case 30.";
+                    infos += "Case Labyrinthe\n  C'était à gauche qu'il fallait prendre !\n  Vous vous êtes perdu. \n  Retournez donc à la case 30.";
                     break;
                 case Event.Mort:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 4, GameData.CaseHeight * 0, GameData.CaseWidth, GameData.CaseHeight);
@@ -66,23 +66,23 @@ namespace JeuDeLOie
                     break;
                 case Event.Nothing:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 0, GameData.CaseHeight * 1, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Vide\nC'est totalement inutile de s'attarder ici, il ne s'y passe jamais rien.";
+                    infos += "Case Vide\n  C'est totalement inutile de s'attarder ici,\n  il ne s'y passe jamais rien.";
                     break;
                 case Event.Oie:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 1, GameData.CaseHeight * 1, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Oie\nC'est votre tour de chance ! Vous rencontrez une oie et avancez encore du même nombre de case.";
+                    infos += "Case Oie\n  C'est votre tour de chance ! \n  Vous rencontrez une oie et avancez \n  encore du même nombre de case.";
                     break;
                 case Event.Pont:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 2, GameData.CaseHeight * 1, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Pont\nSerait-ce un raccourci ? Vous empruntez le pont et atterrissez en case 12.";
+                    infos += "Case Pont\n  Serait-ce un raccourci ?\n  Vous empruntez le pont et atterrissez \n  en case 12.";
                     break;
                 case Event.Prison:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 3, GameData.CaseHeight * 1, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Prison\n  Vous n'auriez pas du le faire...\n  Vous devez maintenant attendre que quelqu'un passe prendre votre place.";
+                    infos += "Case Prison\n  Vous n'auriez pas du le faire...\n  Vous devez maintenant attendre que\n  quelqu'un passe prendre votre place.";
                     break;
                 case Event.Puits:
                     OuSurLaTexture = new Rectangle(GameData.CaseWidth * 4, GameData.CaseHeight * 1, GameData.CaseWidth, GameData.CaseHeight);
-                    infos += "Case Puits\n  Vous n'avez pas regardé où vous alliez, et hop! dans le puits. \n  Vous y resterez 2 tours sauf si quelqu'un y tombe avant, \n  prenant votre place au fond du trou.";
+                    infos += "Case Puits\n  Vous n'avez pas regardé où vous alliez, \n  et hop! dans le puits. \n  Restez 2 tours sauf si quelqu'un y tombe\n  avant,  prenant votre place au fond du trou.";
                     break;
 
             }
@@ -120,11 +120,9 @@ namespace JeuDeLOie
                 GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, infos, new Vector2(GameData.PreferredBackBufferWidth / 2 + 12, position.Y+10), Color.Indigo);
                 
             }
-            /* Information a poper :
-             * - image++ de la case
+            /* Informations qui popent :
              * - numéro de la case
              * - event de la case
-             * - eventuellement la personne qui est dessus et si elle a un problème (ex : attendre 2 tours)
              * */
 
         }

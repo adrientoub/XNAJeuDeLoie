@@ -31,7 +31,7 @@ namespace JeuDeLOie
 
         public void Draw()
         {
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, "Ceci est un test d'ecriture \navec saut de ligne.", new Vector2(500, 30), Color.White);
+            
        
         }
         #endregion
@@ -42,14 +42,14 @@ namespace JeuDeLOie
     /* Classe qui code pour l'interface, avec laquelle le joueur interagit.
      * Elle se situera à droite de l'écran de jeu et sera divisée en deux grandes parties.
      * Elle contient les informations sur la partie : 
-     *      PARTIE GENERALE
+     *      PARTIE GENERALE (en haut)
      *      - nombre de joueurs
      *      - temps de jeu
      *      - le classement des joueurs par rapport à l'arrivée 
      *      (si on passe sa souris sur un joueur, on accède à certaines de ses infos :  - nom, pion
      *                                                                                  - position dans le classement, case
      *                                                                                  - si il a un malus)
-     *      PARTIE STATUT du current joueur
+     *      PARTIE STATUT du current joueur (en bas)
      *      - nom, pion
      *      - position dans le classement, case
      *      - si il a un malus
