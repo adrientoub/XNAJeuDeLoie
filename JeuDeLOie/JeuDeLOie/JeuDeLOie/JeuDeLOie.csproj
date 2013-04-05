@@ -112,6 +112,7 @@
     <Compile Include="Dices.cs" />
     <Compile Include="Evenements.cs" />
     <Compile Include="GameData.cs" />
+    <Compile Include="Interface.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="Plateau.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -38,7 +38,7 @@ namespace JeuDeLOie
         #endregion
 
         #region Update & Draw
-        // On lance les dés, ils roulent sur la face rnd.Next(1,7) pendant i = 0 à rnd.Next(10,42) en changeant l'image selon la face.
+        // On lance les dés, ils roulent sur la face rnd.Next(1,7) pendant i = 0 à j = rnd.Next(20,42) en changeant l'image selon la face.
         // Lorsque i == rnd.Next, face arrêtée sur laquelle le jet est stoppée devient result
 
         public void Update()// sera appelé seulement si le dé est en train de rouler
@@ -46,7 +46,7 @@ namespace JeuDeLOie
             if (isRolling)
             {
                 Timer++;
-                if (jet > i && (Timer % 7 == 0)) // permet que i ne change pas à tous les update, laissant plus de suspense..
+                if (jet > i && (Timer % 5 == 0)) // permet que i ne change pas à tous les update, laissant plus de suspense..
                 {
                     result = GameData.Random.Next(1, 7);
                     i++;

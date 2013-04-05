@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JeuDeLOie
 {
-    class Joueur
+    public class Joueur
     {
         #region FIELDS
         int _case;

@@ -21,8 +21,9 @@ namespace JeuDeLOie
 
         public static Plateau plate;
         int tourActuel;
-        Joueur[] joueurs;
+        public static Joueur[] joueurs;
         Dices des;
+        Interface interf;
 
         public Game1()
         {
@@ -51,6 +52,7 @@ namespace JeuDeLOie
             tourActuel = 0;
             des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - GameData.PreferredBackBufferWidth / 4,
                 GameData.PreferredBackBufferHeight - GameData.PreferredBackBufferHeight / 4, 75, 75));
+            
             base.Initialize();
         }
 
@@ -67,6 +69,7 @@ namespace JeuDeLOie
             GameData.SpriteBatch = spriteBatch;
             ContentLoad.Load();
             plate = new Plateau();
+            interf = new Interface();
             // TODO: use this.Content to load your game content here
         }
 
@@ -117,6 +120,7 @@ namespace JeuDeLOie
             spriteBatch.Begin();
             plate.Draw();
             des.Draw();
+            interf.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);
