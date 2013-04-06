@@ -41,10 +41,13 @@ namespace JeuDeLOie
                 new Rectangle(0, 0, ContentLoad.InterfTexture.Width, 347), Color.White);
 
             #region Partie haute
+            // Affichage des infos
+            DrawPartieH();
             // Affichage du chrono
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, chronos, new Vector2(Position.X + 10, Position.Y + 10), Color.White);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, chronos, new Vector2(Position.X + 20, Position.Y + 150), Color.White);
             #endregion
             #region Partie basse
+            DrawPartieB();
             #endregion
             // Affichage des dés/bouton
             DrawBoutonDes();
@@ -56,13 +59,20 @@ namespace JeuDeLOie
 
         #region Gestion des données de la partie haute
         int nombrePlayer;
+        string textenbplayer;
         int nombreTour;
 
         List<Joueur> listPlayer;
-        
+
 
         public void InitDonneesGen()
         {
+            nombrePlayer = Game1.joueurs.Length;
+            textenbplayer = "Nombre de joueurs : ";
+            for (int i = 0; i < nombrePlayer; i++)
+            {
+                textenbplayer += "* ";
+            }
         }
 
         public void UpdateDonneesGen(List<Joueur> listplayer)
@@ -70,17 +80,43 @@ namespace JeuDeLOie
             listplayer.Sort(); // on trie la liste pour avoir l'ordre de progression des joueurs
             listPlayer = listplayer;
         }
+
+        public void DrawPartieH()
+        {
+
+            InitDonneesGen(); /* FIX ME */
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textenbplayer, new Vector2(Position.X + 20, Position.Y + 20), Color.White);
+        }
         #endregion
 
         #region Gestion des données de la partie basse
         Joueur currentPlayer;
+        string textejoueur;
+
 
         public void GetCurrentPlayer(Joueur player)
-        { currentPlayer = player; /* FIX ME */ }
-
-        public void DrawPartieH()
         {
-           // GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte,
+            currentPlayer = player;
+            textejoueur = "Joueur " + (currentPlayer.Tour + 1) + ", c'est à ton tour de jouer (:\n";
+            /* FIX ME */
+        }
+
+        public void DrawPartieB()
+        {
+            // Affichage du portrait du joueur
+            GetCurrentPlayer(Game1.joueurs[0]); /* FIX ME */
+            GameData.SpriteBatch.Draw(currentPlayer.Pion.ImagePerso,
+                new Rectangle((int)Position.X + 2, (int)Position.Y + 347 + 10, 200, 200),
+                currentPlayer.Pion.Portrait, Color.White);
+
+            // Affichage du pion du joueur
+            GameData.SpriteBatch.Draw(currentPlayer.Pion.PionPerso, new Vector2(Position.X + 100, Position.Y + 250), 
+                new Rectangle(currentPlayer.Pion.WidthPion * currentPlayer.Pion.Column, currentPlayer.Pion.HeightPion * currentPlayer.Pion.Line, currentPlayer.Pion.WidthPion, currentPlayer.Pion.HeightPion), 
+                Color.White);
+
+            // Affichage d'infos écrites
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textejoueur, new Vector2(Position.X + 20, Position.Y + 300 ), Color.Indigo);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, Game1.plate.Tab[currentPlayer.Case].Infos, new Vector2(Position.X + 20 + 300, Position.Y + 190), Color.Indigo);
         }
 
 

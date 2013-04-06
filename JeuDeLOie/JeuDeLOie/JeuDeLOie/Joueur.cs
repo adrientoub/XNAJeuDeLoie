@@ -26,6 +26,7 @@ namespace JeuDeLOie
         int lastDiceLaunch;
 
         Pion pion;
+        public Pion Pion { get { return pion; } }
 
         #region Trucs qui ne serviront surement pas
         //bool versArr; // direction, si il va vers l'arrivée, ou l'autre sens

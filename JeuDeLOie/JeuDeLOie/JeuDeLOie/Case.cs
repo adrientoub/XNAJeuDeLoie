@@ -23,6 +23,7 @@ namespace JeuDeLOie
 
         bool intersectsMouse;
         string infos;
+        public string Infos { get { return infos; } }
         Color colorinfos;
         #endregion
 
