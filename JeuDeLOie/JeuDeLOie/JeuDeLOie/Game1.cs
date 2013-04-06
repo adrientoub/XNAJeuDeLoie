@@ -30,6 +30,7 @@ namespace JeuDeLOie
         Rectangle mairec;
         Rectangle mooglerec;
         int compteperso;
+        string choixjoueur;
 
         enum GameState
         {
@@ -63,10 +64,11 @@ namespace JeuDeLOie
             // TODO: Add your initialization logic here
 
             tourActuel = 0;
-            crocorec = new Rectangle(400, 200, 200, 400);
-            conanrec = new Rectangle(150, 200, 200, 400);
-            mairec = new Rectangle(650, 200, 200, 400);
-            mooglerec = new Rectangle(900, 300, 150, 300);
+            crocorec = new Rectangle(400, 300, 200, 400);
+            conanrec = new Rectangle(150, 300, 200, 400);
+            mairec = new Rectangle(650, 300, 200, 400);
+            mooglerec = new Rectangle(900, 400, 150, 300);
+            choixjoueur = "";
 
             base.Initialize();
         }
@@ -189,6 +191,14 @@ namespace JeuDeLOie
                     }
                     if (compteperso == nbjoueurs)
                         CurrentGameState = GameState.Playing;
+                    else if (compteperso == 0)
+                        choixjoueur = "Joueur1, veuillez sélectonner votre personnage";
+                    else if (compteperso == 1)
+                        choixjoueur = "C'est au Joueur2 de choisir son personnage";
+                    else if (compteperso == 2)
+                        choixjoueur = "C'est au Joueur3 de choisir son personnage";
+                    else if (compteperso == 3)
+                        choixjoueur = "C'est au Joueur4 de choisir son personnage";
 
 
 
@@ -239,10 +249,12 @@ namespace JeuDeLOie
                     break;
 
                 case GameState.Characters:
+                    spriteBatch.Draw(Content.Load<Texture2D>("SelectionPerso"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), mooglerec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Mai"), mairec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), crocorec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Conan"), conanrec, Color.White);
+                    GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, choixjoueur, new Vector2(GameData.PreferredBackBufferWidth / 2 - 100, 100), Color.Black);
                     break;
                 case GameState.Playing:
                     interf.Draw();
