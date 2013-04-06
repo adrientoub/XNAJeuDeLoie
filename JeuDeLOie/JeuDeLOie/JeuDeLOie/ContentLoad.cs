@@ -50,11 +50,11 @@ namespace JeuDeLOie
             btnQuit = new cButton(GameData.Content.Load<Texture2D>("QuitButton"), Game1.graphics.GraphicsDevice, 100, 75);
             btnQuit.setPosition(new Vector2(screenWidth / 2 - btnQuit.size.X / 2, screenHeight / 2 - 50));
             btn2 = new cButton(GameData.Content.Load<Texture2D>("Button2"), Game1.graphics.GraphicsDevice, 100, 75);
-            btn2.setPosition(new Vector2(screenWidth / 2 - btn2.size.X / 2 - 200, screenHeight / 2 ));
+            btn2.setPosition(new Vector2(screenWidth / 2 - btn2.size.X / 2 - 150, screenHeight / 2 ));
             btn3 = new cButton(GameData.Content.Load<Texture2D>("Button3"), Game1.graphics.GraphicsDevice, 100, 75);
-            btn3.setPosition(new Vector2(screenWidth / 2 - btn3.size.X / 2 - 50, screenHeight / 2 ));
+            btn3.setPosition(new Vector2(screenWidth / 2 - btn3.size.X / 2 , screenHeight / 2 ));
             btn4 = new cButton(GameData.Content.Load<Texture2D>("Button4"), Game1.graphics.GraphicsDevice, 100, 75);
-            btn4.setPosition(new Vector2(screenWidth / 2 - btn4.size.X / 2 + 100, screenHeight / 2 ));
+            btn4.setPosition(new Vector2(screenWidth / 2 - btn4.size.X / 2 + 150, screenHeight / 2 ));
 
         }
     }
