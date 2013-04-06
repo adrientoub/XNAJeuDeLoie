@@ -25,6 +25,12 @@ namespace JeuDeLOie
         public bool isFirstTimeCharacter;
         Interface interf;
 
+        Rectangle crocorec;
+        Rectangle conanrec;
+        Rectangle mairec;
+        Rectangle mooglerec;
+        int compteperso;
+
         enum GameState
         {
             Title,
@@ -57,7 +63,10 @@ namespace JeuDeLOie
             // TODO: Add your initialization logic here
 
             tourActuel = 0;
-
+            crocorec = new Rectangle(400, 200, 200, 400);
+            conanrec = new Rectangle(150, 200, 200, 400);
+            mairec = new Rectangle(650, 200, 200, 400);
+            mooglerec = new Rectangle(900, 300, 150, 300);
 
             base.Initialize();
         }
@@ -148,14 +157,42 @@ namespace JeuDeLOie
                     {
                         joueurs = new Joueur[nbjoueurs];
                         isFirstTimeCharacter = false;
-                        // A supprimer quand on aura fini la selection.
-                        for (int i = 0; i < joueurs.Length; i++)
-            			{
-                            joueurs[i] = new Joueur(i, "conan");
-			            } 
+                        // A supprimer quand on aura fini la selection. 
+                        compteperso = 0;
                     }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+
+
+                    if (conanrec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
+                    {
+                        joueurs[compteperso] = new Joueur(compteperso, "Conan");
+                        compteperso++;
+                        conanrec = new Rectangle(0, 0, 0, 0);
+                    }
+                    else if (crocorec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
+                    {
+                        joueurs[compteperso] = new Joueur(compteperso, "Crocodile");
+                        compteperso++;
+                        crocorec = new Rectangle(0, 0, 0, 0);
+                    }
+
+                    else if (mairec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
+                    {
+                        joueurs[compteperso] = new Joueur(compteperso, "Mai");
+                        compteperso++;
+                        mairec = new Rectangle(0, 0, 0, 0);
+                    }
+                    else if (mooglerec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
+                    {
+                        joueurs[compteperso] = new Joueur(compteperso, "Moogle");
+                        compteperso++;
+                        mooglerec = new Rectangle(0, 0, 0, 0);
+                    }
+                    if (compteperso == nbjoueurs)
                         CurrentGameState = GameState.Playing;
+
+
+
+
                     break;
                 case GameState.Playing:
                     // TODO: Add your update logic here
@@ -202,10 +239,10 @@ namespace JeuDeLOie
                     break;
 
                 case GameState.Characters:
-                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), new Rectangle(900, 300, 150, 300), Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Mai"), new Rectangle(650, 200, 200, 400), Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), new Rectangle(400, 200, 200, 400), Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Conan"), new Rectangle(150, 200, 200, 400), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), mooglerec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Mai"), mairec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), crocorec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Conan"), conanrec, Color.White);
                     break;
                 case GameState.Playing:
                     interf.Draw();
