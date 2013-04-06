@@ -25,6 +25,7 @@ namespace JeuDeLOie
         public bool isFirstTimeCharacter;
         Dices des;
         Interface interf;
+        int a = 32;
 
         enum GameState
         {
@@ -205,7 +206,7 @@ namespace JeuDeLOie
                     break;
 
                 case GameState.Characters:
-                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), new Rectangle(900, 300, 150, 300), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), new Rectangle(a, 300, 150, 300), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Mai"), new Rectangle(650, 200, 200, 400), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), new Rectangle(400, 200, 200, 400), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Conan"), new Rectangle(150, 200, 200, 400), Color.White);

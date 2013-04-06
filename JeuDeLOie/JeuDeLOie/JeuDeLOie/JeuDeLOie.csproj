@@ -110,6 +110,7 @@
     <Compile Include="Case.cs" />
     <Compile Include="cButton.cs" />
     <Compile Include="ContentLoad.cs" />
+    <Compile Include="Pion.cs" />
     <Compile Include="Dices.cs" />
     <Compile Include="Evenements.cs" />
     <Compile Include="GameData.cs" />
