@@ -16,16 +16,16 @@ namespace JeuDeLOie
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public static Plateau plate;
         int tourActuel, nbjoueurs;
         public static Joueur[] joueurs;
+        public bool isFirstTimeCharacter;
         Dices des;
         Interface interf;
 
-        int screenWidth, screenHeight;
         enum GameState
         {
             Title,
@@ -35,8 +35,6 @@ namespace JeuDeLOie
             Playing,
         }
 
-
-        cButton btnPlay, btnQuit, btn2, btn3, btn4;
 
         GameState CurrentGameState = GameState.Title;
 
@@ -58,11 +56,6 @@ namespace JeuDeLOie
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            joueurs = new Joueur[4];
-            for (int i = 0; i < joueurs.Length; i++)
-            {
-                joueurs[i] = new Joueur(i, "");
-            }
 
             tourActuel = 0;
 
@@ -86,21 +79,6 @@ namespace JeuDeLOie
             interf = new Interface();
             des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - 75 * 2 - 60, (int)interf.Position.Y + 347 + 20, 75, 75));
             // TODO: use this.Content to load your game content here
-
-            screenHeight = graphics.PreferredBackBufferHeight;
-            screenWidth = graphics.PreferredBackBufferWidth;
-
-            //Button
-            btnPlay = new cButton(Content.Load<Texture2D>("PlayButton"), graphics.GraphicsDevice, 100, 75);
-            btnPlay.setPosition(new Vector2(screenWidth / 2 - btnPlay.size.X / 2, screenHeight / 2 - 150));
-            btnQuit = new cButton(Content.Load<Texture2D>("QuitButton"), graphics.GraphicsDevice, 100, 75);
-            btnQuit.setPosition(new Vector2(screenWidth / 2 - btnQuit.size.X / 2, screenHeight / 2 - 50));
-            btn2 = new cButton(Content.Load<Texture2D>("Button2"), graphics.GraphicsDevice, 100, 75);
-            btn2.setPosition(new Vector2(screenWidth / 2 - btn2.size.X / 2, screenHeight / 2 - 50));
-            btn3 = new cButton(Content.Load<Texture2D>("Button3"), graphics.GraphicsDevice, 100, 75);
-            btn3.setPosition(new Vector2(screenWidth / 2 - btn3.size.X / 2, screenHeight / 2 - 250));
-            btn4 = new cButton(Content.Load<Texture2D>("Button4"), graphics.GraphicsDevice, 100, 75);
-            btn4.setPosition(new Vector2(screenWidth / 2 - btn4.size.X / 2, screenHeight / 2 + 50));
 
         }
 
@@ -134,39 +112,50 @@ namespace JeuDeLOie
                     break;
 
                 case GameState.MainMenu:
-                    if (btnPlay.isClicked == true)
+                    if (ContentLoad.btnPlay.isClicked == true)
                     {
                         CurrentGameState = GameState.Setting;
                     }
-                    if (btnQuit.isClicked == true)
+                    if (ContentLoad.btnQuit.isClicked == true)
                         Exit();
-                    btnPlay.Update(mouse, gameTime);
-                    btnQuit.Update(mouse, gameTime);
+                    ContentLoad.btnPlay.Update(mouse, gameTime);
+                    ContentLoad.btnQuit.Update(mouse, gameTime);
                     break;
 
                 case GameState.Setting:
-                    if (btn2.isClicked)
+                    if (ContentLoad.btn2.isClicked)
                     {
                         nbjoueurs = 2;
                         CurrentGameState = GameState.Characters;
                     }
-                    if (btn3.isClicked)
+                    if (ContentLoad.btn3.isClicked)
                     {
                         nbjoueurs = 3;
                         CurrentGameState = GameState.Characters;
                     }
-                    if (btn4.isClicked)
+                    if (ContentLoad.btn4.isClicked)
                     {
                         nbjoueurs = 4;
                         CurrentGameState = GameState.Characters;
                     }
+                    isFirstTimeCharacter = true;
 
-                    btn2.Update(mouse, gameTime);
-                    btn3.Update(mouse, gameTime);
-                    btn4.Update(mouse, gameTime);
+                    ContentLoad.btn2.Update(mouse, gameTime);
+                    ContentLoad.btn3.Update(mouse, gameTime);
+                    ContentLoad.btn4.Update(mouse, gameTime);
                     break;
 
                 case GameState.Characters:
+                    if (isFirstTimeCharacter)
+                    {
+                        joueurs = new Joueur[nbjoueurs];
+                        isFirstTimeCharacter = false;
+                        // A supprimer quand on aura fini la selection.
+                        for (int i = 0; i < joueurs.Length; i++)
+            			{
+                            joueurs[i] = new Joueur(i, "");
+			            } 
+                    }
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                         CurrentGameState = GameState.Playing;
                     break;
@@ -200,19 +189,19 @@ namespace JeuDeLOie
             switch (CurrentGameState)
             {
                 case GameState.Title:
-                    spriteBatch.Draw(Content.Load<Texture2D>("Title"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Title"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
                     break;
 
                 case GameState.MainMenu:
-                    spriteBatch.Draw(Content.Load<Texture2D>("Menu"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
-                    btnPlay.Draw(spriteBatch);
-                    btnQuit.Draw(spriteBatch);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Menu"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
+                    ContentLoad.btnPlay.Draw(spriteBatch);
+                    ContentLoad.btnQuit.Draw(spriteBatch);
 
                     break;
                 case GameState.Setting:
-                    btn2.Draw(spriteBatch);
-                    btn3.Draw(spriteBatch);
-                    btn4.Draw(spriteBatch);
+                    ContentLoad.btn2.Draw(spriteBatch);
+                    ContentLoad.btn3.Draw(spriteBatch);
+                    ContentLoad.btn4.Draw(spriteBatch);
                     break;
 
                 case GameState.Characters:

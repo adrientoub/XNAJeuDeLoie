@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace JeuDeLOie
 {
-    class cButton
+    public class cButton
     {
         Texture2D texture;
         Vector2 position;
