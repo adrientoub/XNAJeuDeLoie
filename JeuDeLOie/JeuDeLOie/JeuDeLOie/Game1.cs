@@ -23,9 +23,7 @@ namespace JeuDeLOie
         int tourActuel, nbjoueurs;
         public static Joueur[] joueurs;
         public bool isFirstTimeCharacter;
-        Dices des;
         Interface interf;
-        int a = 32;
 
         enum GameState
         {
@@ -78,7 +76,6 @@ namespace JeuDeLOie
             ContentLoad.Load();
             plate = new Plateau();
             interf = new Interface();
-            des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - 75 * 2 - 60, (int)interf.Position.Y + 347 + 20, 75, 75));
             // TODO: use this.Content to load your game content here
 
         }
@@ -154,7 +151,7 @@ namespace JeuDeLOie
                         // A supprimer quand on aura fini la selection.
                         for (int i = 0; i < joueurs.Length; i++)
             			{
-                            joueurs[i] = new Joueur(i, "");
+                            joueurs[i] = new Joueur(i, "conan");
 			            } 
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -171,7 +168,6 @@ namespace JeuDeLOie
                         j.Update(tourActuel);
                     }
 
-                    des.Update();
                     interf.Update();
                     break;
             }
@@ -206,15 +202,18 @@ namespace JeuDeLOie
                     break;
 
                 case GameState.Characters:
-                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), new Rectangle(a, 300, 150, 300), Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), new Rectangle(900, 300, 150, 300), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Mai"), new Rectangle(650, 200, 200, 400), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), new Rectangle(400, 200, 200, 400), Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Conan"), new Rectangle(150, 200, 200, 400), Color.White);
                     break;
                 case GameState.Playing:
                     interf.Draw();
-                    //   des.Draw();
                     plate.Draw();
+                    foreach (var ply in joueurs)
+                    {
+                        ply.Draw();
+                    }
                     break;
             }
             spriteBatch.End();

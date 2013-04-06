@@ -25,6 +25,8 @@ namespace JeuDeLOie
         int cooldown; // Le nombre de tours que le joueur doit attendre
         int lastDiceLaunch;
 
+        Pion pion;
+
         #region Trucs qui ne serviront surement pas
         //bool versArr; // direction, si il va vers l'arrivée, ou l'autre sens
         string name;
@@ -36,10 +38,12 @@ namespace JeuDeLOie
         public Joueur(int tour, string name)
         {
             this.tour = tour;
-            this.name = name;
+            pion = new Pion(name, tour);
             _case = 0;
             cooldown = 0;
             lastDiceLaunch = 0;
+
+            // on place son pion au bon endroit
         }
         #endregion
 
@@ -95,10 +99,13 @@ namespace JeuDeLOie
                     ApplyEvent(evenement);
                 }
             }
+
+            pion.Update();
         }
 
         public void Draw()
         {
+            pion.Draw();
         }
         #endregion
     }

@@ -19,6 +19,7 @@ namespace JeuDeLOie
         Rectangle OuSurLaTexture;
         public Color color;
         public int Numero { get; set; }
+        public bool isTurning { get; set; }
 
         bool intersectsMouse;
         string infos;
@@ -26,7 +27,7 @@ namespace JeuDeLOie
         #endregion
 
         #region CONSTRUCTOR
-        public Case(Rectangle position, Event evenement, int numero)
+        public Case(Rectangle position, Event evenement, int numero, bool tourne)
         {
             this.evenement = evenement;
             Numero = numero;
@@ -36,6 +37,7 @@ namespace JeuDeLOie
             color = Color.White;
             colorinfos = Color.Indigo;
             colorinfos.A -= 42;
+            isTurning = tourne;
         }
         #endregion
 
