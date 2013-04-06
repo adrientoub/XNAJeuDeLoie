@@ -69,10 +69,26 @@ namespace JeuDeLOie
                     _case = 12;
                     break;
                 case Event.Prison:
-                    cooldown = int.MaxValue; // Ajouter la libération en cas de nouveau joueur sur la case
+                    for (int i = 0; i < Game1.joueurs.Length; i++)
+                    {
+                        if (i != tour && Game1.joueurs[i].Case == 51)
+                        {
+                            Game1.joueurs[i].cooldown = 0; // Ajouter quelque chose dans l'interface qui explique qu'il est libre :)
+                            break;
+                        }
+                    }
+                    cooldown = int.MaxValue; 
                     break;
                 case Event.Puits:
-                    cooldown = 2;// Ajouter la libération en cas de nouveau joueur sur la case
+                    for (int i = 0; i < Game1.joueurs.Length; i++)
+                    {
+                        if (i != tour && Game1.joueurs[i].Case == 31)
+                        {
+                            Game1.joueurs[i].cooldown = 0; // Ajouter quelque chose dans l'interface qui explique qu'il est libre :)
+                            break;
+                        }
+                    }
+                    cooldown = 2;
                     break;
                 case Event.CaseArr:
                     // Activer la win
