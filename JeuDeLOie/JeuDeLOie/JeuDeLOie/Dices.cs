@@ -72,6 +72,7 @@ namespace JeuDeLOie
         static List<Dice> dices;
         Dice d1, d2;
         int Result;
+        public int DicesResult { get { return Result; } }
         bool isRolling, isInit;
         public bool IsRolling { get { return isRolling; } }
         Rectangle position, position2; // position2 est celle du deuxième dé
@@ -116,7 +117,7 @@ namespace JeuDeLOie
         /// <summary>
         /// Renvoit le résultat de l'addition des deux dés
         /// </summary>
-        public void NewResult()
+        void NewResult()
         { Result = d1.Result + d2.Result; }
         #endregion
 

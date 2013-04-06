@@ -42,7 +42,7 @@ namespace JeuDeLOie
 
             #region Partie haute
             // Affichage du chrono
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, chronos, new Vector2(Position.X + 10, Position.Y + 10), Color.White); 
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, chronos, new Vector2(Position.X + 10, Position.Y + 10), Color.White);
             #endregion
             #region Partie basse
             #endregion
@@ -54,11 +54,45 @@ namespace JeuDeLOie
 
 
 
+        #region Gestion des données de la partie haute
+        int nombrePlayer;
+        int nombreTour;
+
+        List<Joueur> listPlayer;
+        
+
+        public void InitDonneesGen()
+        {
+        }
+
+        public void UpdateDonneesGen(List<Joueur> listplayer)
+        {
+            listplayer.Sort(); // on trie la liste pour avoir l'ordre de progression des joueurs
+            listPlayer = listplayer;
+        }
+        #endregion
+
+        #region Gestion des données de la partie basse
+        Joueur currentPlayer;
+
+        public void GetCurrentPlayer(Joueur player)
+        { currentPlayer = player; /* FIX ME */ }
+
+        public void DrawPartieH()
+        {
+           // GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte,
+        }
+
+
+
+        #endregion
+
         #region Gestion du chrono de jeu
         int secondes, minutes, heures, jours;
         float timer;
         bool chronosIsRunning;
         string chronos;
+
         public void InitChronos()
         {
             timer = 0f;
@@ -68,8 +102,8 @@ namespace JeuDeLOie
 
         public void UpdateChrono()
         {
-            timer += (float)GameData.GameTime.ElapsedGameTime.TotalMilliseconds; 
-            if (timer >= secondes*1000 +1)
+            timer += (float)GameData.GameTime.ElapsedGameTime.TotalMilliseconds;
+            if (timer >= secondes * 1000 + 1)
             {
                 secondes = (int)timer / 1000;
                 minutes = secondes / 60;
@@ -77,11 +111,12 @@ namespace JeuDeLOie
                 minutes %= 60;
                 jours = heures / 24;
                 heures = heures % 24;
-                chronos = "Temps de jeu : " + jours + "jours " + heures + "h " + minutes + "min " + (secondes%60) + "s";
+                chronos = "Temps de jeu : " + jours + "jours " + heures + "h " + minutes + "min " + (secondes % 60) + "s";
             }
         }
 
         #endregion
+
         #region Gestion du bouton et des dés
         string textebouton;
         bool deslances;
@@ -89,6 +124,7 @@ namespace JeuDeLOie
         Color colorbouton;
         Dices dices;
         bool intersectsMouse;
+        public int DicesResult { get; set; }
 
         void InitBoutonDes()
         {
@@ -159,12 +195,13 @@ namespace JeuDeLOie
             }
             #endregion
             dices.Update();
+            DicesResult = dices.DicesResult;
         }
 
         void DrawBoutonDes()
         {
             GameData.SpriteBatch.Draw(ContentLoad.InterfTexture, rectBouton, new Rectangle(0, 347, rectBouton.Width, rectBouton.Height), colorbouton);
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textebouton, new Vector2 (rectBouton.X, rectBouton.Y + 7), colorbouton);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textebouton, new Vector2(rectBouton.X, rectBouton.Y + 7), colorbouton);
             dices.Draw();
         }
         #endregion
