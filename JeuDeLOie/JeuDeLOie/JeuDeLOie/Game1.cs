@@ -50,8 +50,7 @@ namespace JeuDeLOie
 			}
                 
             tourActuel = 0;
-            des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - GameData.PreferredBackBufferWidth / 2,
-                GameData.PreferredBackBufferHeight - GameData.PreferredBackBufferHeight / 4, 75, 75));
+            
             
             base.Initialize();
         }
@@ -70,6 +69,7 @@ namespace JeuDeLOie
             ContentLoad.Load();
             plate = new Plateau();
             interf = new Interface();
+            des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - 75 * 2 - 60, (int)interf.Position.Y + 347 + 20, 75, 75));
             // TODO: use this.Content to load your game content here
         }
 
@@ -106,7 +106,7 @@ namespace JeuDeLOie
             }
 
             des.Update();
-
+            interf.Update();
             GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);
         }
@@ -119,9 +119,9 @@ namespace JeuDeLOie
         {
             GraphicsDevice.Clear(Color.Indigo);
             spriteBatch.Begin();
-            des.Draw();
-            plate.Draw();
             interf.Draw();
+         //   des.Draw();
+            plate.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

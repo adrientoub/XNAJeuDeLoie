@@ -73,6 +73,7 @@ namespace JeuDeLOie
         Dice d1, d2;
         int Result;
         bool isRolling, isInit;
+        public bool IsRolling { get { return isRolling; } }
         Rectangle position, position2; // position2 est celle du deuxième dé
         #endregion
 
@@ -94,16 +95,22 @@ namespace JeuDeLOie
         #region METHODS
         public void ReInit()
         {
-            d1.ReInit(); d2.ReInit();
-            isInit = true;
+            if (!isRolling)
+            {
+                d1.ReInit(); d2.ReInit();
+                isInit = true;
+            }
         }
 
         public void RollDices()
         {
-            isRolling = true;
-            d1.RollDice();
-            d2.RollDice();
-            isInit = false;
+            if (isInit && !isRolling)
+            {
+                isRolling = true;
+                d1.RollDice();
+                d2.RollDice();
+                isInit = false;
+            }
         }
 
         /// <summary>
@@ -118,17 +125,6 @@ namespace JeuDeLOie
         {
             foreach (var dice in dices)
                 dice.Update();
-
-            // pour l'instant, on lance les dés avec clic gauche, à modif sur un bouton
-            if (GameData.MouseState.LeftButton == ButtonState.Pressed
-                && GameData.PreviousMouseState != GameData.MouseState
-                && !isRolling && isInit)
-            { RollDices(); }
-            // et on reinit avec clic droit // ceci devra être fait seulement lorsqu'on voudra relancer les dés
-            if (GameData.MouseState.RightButton == ButtonState.Pressed
-                && GameData.PreviousMouseState != GameData.MouseState
-                && !isRolling)
-            { ReInit(); }
 
             if (isRolling)
             {
