@@ -250,7 +250,7 @@ namespace JeuDeLOie
 
                 case GameState.Characters:
                     spriteBatch.Draw(Content.Load<Texture2D>("SelectionPerso"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Moogl"), mooglerec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Moogle"), mooglerec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Mai"), mairec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), crocorec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Conan"), conanrec, Color.White);
