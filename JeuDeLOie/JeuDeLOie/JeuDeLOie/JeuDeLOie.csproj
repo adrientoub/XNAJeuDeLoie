@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Case.cs" />
+    <Compile Include="cButton.cs" />
     <Compile Include="ContentLoad.cs" />
     <Compile Include="Dices.cs" />
     <Compile Include="Evenements.cs" />

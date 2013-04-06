@@ -29,6 +29,7 @@ namespace JeuDeLOie
             InterfTexture = GameData.Content.Load<Texture2D>("textureinfJDlO");
             SpriteFonte = GameData.Content.Load<SpriteFont>("SpriteFont");
             
+            personnages = new List<Texture2D>();
             personnages.Add(GameData.Content.Load<Texture2D>("BoyPion"));
             personnages.Add(GameData.Content.Load<Texture2D>("CrocoPion"));
             personnages.Add(GameData.Content.Load<Texture2D>("GirlyPion"));
