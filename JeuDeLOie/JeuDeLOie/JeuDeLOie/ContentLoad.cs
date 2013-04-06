@@ -18,6 +18,9 @@ namespace JeuDeLOie
         /* FONTS */
         public static SpriteFont SpriteFonte;
 
+        /* Sprites personnages */
+        public static List<Texture2D> personnages;
+
         public static void Load()
         {
             CaseTexture = GameData.Content.Load<Texture2D>("texturecaseJDlO");
@@ -26,6 +29,10 @@ namespace JeuDeLOie
             InterfTexture = GameData.Content.Load<Texture2D>("textureinfJDlO");
             SpriteFonte = GameData.Content.Load<SpriteFont>("SpriteFont");
             
+            personnages.Add(GameData.Content.Load<Texture2D>("BoyPion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("CrocoPion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("GirlyPion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("Moogle"));
         }
     }
 }
