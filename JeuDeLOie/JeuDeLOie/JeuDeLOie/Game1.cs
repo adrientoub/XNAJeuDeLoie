@@ -50,7 +50,7 @@ namespace JeuDeLOie
 			}
                 
             tourActuel = 0;
-            des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - GameData.PreferredBackBufferWidth / 4,
+            des = new Dices(new Rectangle(GameData.PreferredBackBufferWidth - GameData.PreferredBackBufferWidth / 2,
                 GameData.PreferredBackBufferHeight - GameData.PreferredBackBufferHeight / 4, 75, 75));
             
             base.Initialize();
@@ -93,6 +93,7 @@ namespace JeuDeLOie
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             GameData.MouseState = Mouse.GetState();
+            GameData.GameTime = gameTime;
 
             // TODO: Add your update logic here
             plate.Update();
@@ -118,8 +119,8 @@ namespace JeuDeLOie
         {
             GraphicsDevice.Clear(Color.Indigo);
             spriteBatch.Begin();
-            plate.Draw();
             des.Draw();
+            plate.Draw();
             interf.Draw();
             spriteBatch.End();
 

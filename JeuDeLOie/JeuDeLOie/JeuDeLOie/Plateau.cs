@@ -76,13 +76,14 @@ namespace JeuDeLOie
         }
         void ConstructionCaseGoose()
         {
-            for (int i = 1; i < 63; i++)
+            for (int i = 1; i < 55; i++)
                 if (i % 9 == 0)
                     tab[i] = new Case(tab[i].Position, Event.Oie, i);
         }
         void ConstructionCaseEvent()
         {
             tab[0] = new Case(tab[0].Position, Event.CaseDep, 0);
+            tab[0].Change4CaseDep();
             tab[6] = new Case(tab[6].Position, Event.Pont, 6);
             tab[19] = new Case(tab[19].Position, Event.Hotel, 19);
             tab[31] = new Case(tab[31].Position, Event.Puits, 31);

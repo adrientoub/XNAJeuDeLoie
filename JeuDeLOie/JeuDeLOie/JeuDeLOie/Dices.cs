@@ -81,7 +81,7 @@ namespace JeuDeLOie
         {
             this.position = position;
             position2 = position;
-            position2.Y += 75 + 5;
+            position2.X += 75 + 5;
             dices = new List<Dice>() { new Dice(), new Dice() };
             d1 = new Dice();
             d1.InitDice();

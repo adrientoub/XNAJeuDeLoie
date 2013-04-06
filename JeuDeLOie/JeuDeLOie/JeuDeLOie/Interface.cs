@@ -10,14 +10,14 @@ namespace JeuDeLOie
     class Interface
     {
         #region FIELDS
-        
+
 
         #endregion
 
         #region CONSTRUCTORS
         public Interface()
         {
-           
+            InitChronos();
         }
         #endregion
 
@@ -31,11 +31,43 @@ namespace JeuDeLOie
 
         public void Draw()
         {
-            
-       
+            UpdateChrono();
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, "Temps de jeu", Vector2.Zero, Color.White);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, chronos, new Vector2(0, 20), Color.White); 
+
         }
         #endregion
 
+
+
+        #region Gestion du chrono de jeu
+        int secondes, minutes, heures, jours;
+        float timer;
+        bool chronosIsRunning;
+        string chronos;
+        public void InitChronos()
+        {
+            timer = 0f;
+            chronosIsRunning = true;
+            chronos = jours + "jours " + heures + "h " + minutes + "min " + secondes + "s";
+        }
+
+        public void UpdateChrono()
+        {
+            timer += (float)GameData.GameTime.ElapsedGameTime.TotalMilliseconds; 
+            if (timer >= secondes*1000 +1)
+            {
+                secondes = (int)timer / 1000;
+                minutes = secondes / 60;
+                heures = minutes / 60;
+                minutes %= 60;
+                jours = heures / 24;
+                heures = heures % 24;
+                chronos = jours + "jours " + heures + "h " + minutes + "min " + (secondes%60) + "s";
+            }
+        }
+
+        #endregion
 
     }
 
@@ -49,7 +81,7 @@ namespace JeuDeLOie
      *      (si on passe sa souris sur un joueur, on accède à certaines de ses infos :  - nom, pion
      *                                                                                  - position dans le classement, case
      *                                                                                  - si il a un malus)
-     *      PARTIE STATUT du current joueur (en bas)
+     *      PARTIE STATUT du current joueur, couleur selon le joueur ? (en bas)
      *      - nom, pion
      *      - position dans le classement, case
      *      - si il a un malus

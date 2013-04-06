@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace JeuDeLOie
 {
@@ -24,6 +25,8 @@ namespace JeuDeLOie
         public static int PreferredBackBufferWidth = 16 * 80;
 
         public static Random Random = new Random();
+
+        public static GameTime GameTime;
  
     }
 }

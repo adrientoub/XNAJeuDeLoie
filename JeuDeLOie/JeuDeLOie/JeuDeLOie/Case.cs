@@ -22,6 +22,7 @@ namespace JeuDeLOie
 
         bool intersectsMouse;
         string infos;
+        Color colorinfos;
         #endregion
 
         #region CONSTRUCTOR
@@ -33,6 +34,8 @@ namespace JeuDeLOie
             InitInfos();
             this.position = position;
             color = Color.White;
+            colorinfos = Color.Indigo;
+            colorinfos.A -= 42;
         }
         #endregion
 
@@ -87,6 +90,15 @@ namespace JeuDeLOie
 
             }
         }
+        public void Change4CaseDep()
+        {
+            if (evenement == Event.CaseDep)
+            {
+                position.Width += 24; position.Height += 24;
+                position.X -= 24;
+                position.Y -= 24 / 2;
+            }
+        }
         #endregion
 
         #region UPDATE & DRAW
@@ -116,8 +128,8 @@ namespace JeuDeLOie
             // si la souris est sur une case, on affiche ses propriétés
             if (intersectsMouse)
             {
-                GameData.SpriteBatch.Draw(ContentLoad.InfosTexture, new Vector2(GameData.PreferredBackBufferWidth / 2 + 2, position.Y), Color.White);
-                GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, infos, new Vector2(GameData.PreferredBackBufferWidth / 2 + 12, position.Y+10), Color.Indigo);
+                GameData.SpriteBatch.Draw(ContentLoad.InfosTexture, new Vector2(GameData.PreferredBackBufferWidth / 2 + 2, position.Y), colorinfos);
+                GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, infos, new Vector2(GameData.PreferredBackBufferWidth / 2 + 12, position.Y+10), Color.White);
                 
             }
             /* Informations qui popent :
