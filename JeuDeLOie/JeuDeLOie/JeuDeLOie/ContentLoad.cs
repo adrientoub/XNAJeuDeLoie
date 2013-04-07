@@ -45,10 +45,10 @@ namespace JeuDeLOie
             screenWidth = Game1.graphics.PreferredBackBufferWidth;
 
             //Button
-            btnPlay = new cButton(GameData.Content.Load<Texture2D>("PlayButton"), Game1.graphics.GraphicsDevice, 100, 75);
-            btnPlay.setPosition(new Vector2(screenWidth / 2 - btnPlay.size.X / 2, screenHeight / 2 - 150));
-            btnQuit = new cButton(GameData.Content.Load<Texture2D>("QuitButton"), Game1.graphics.GraphicsDevice, 100, 75);
-            btnQuit.setPosition(new Vector2(screenWidth / 2 - btnQuit.size.X / 2, screenHeight / 2 - 50));
+            btnPlay = new cButton(GameData.Content.Load<Texture2D>("PlayButton"), Game1.graphics.GraphicsDevice, 200, 150);
+            btnPlay.setPosition(new Vector2(screenWidth / 2 - btnPlay.size.X / 2, screenHeight / 2 - 250));
+            btnQuit = new cButton(GameData.Content.Load<Texture2D>("QuitButton"), Game1.graphics.GraphicsDevice, 200, 150);
+            btnQuit.setPosition(new Vector2(screenWidth / 2 - btnQuit.size.X / 2, screenHeight / 2 - 100));
             btn2 = new cButton(GameData.Content.Load<Texture2D>("Button2"), Game1.graphics.GraphicsDevice, 150, 150);
             btn2.setPosition(new Vector2( 225, screenHeight / 2 - 75 ));
             btn3 = new cButton(GameData.Content.Load<Texture2D>("Button3"), Game1.graphics.GraphicsDevice, 150, 150);
