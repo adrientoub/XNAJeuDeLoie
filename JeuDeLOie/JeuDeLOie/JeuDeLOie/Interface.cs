@@ -60,7 +60,6 @@ namespace JeuDeLOie
         #region Gestion des données de la partie haute
         int nombrePlayer;
         string textenbplayer;
-        int nombreTour;
         string texteclassementjoueur;
 
         List<Joueur> listPlayer;
@@ -136,7 +135,7 @@ namespace JeuDeLOie
         public void DrawPartieB()
         {
             // Affichage du portrait du joueur
-            GetCurrentPlayer(Game1.joueurs[Game1.tourActuel]);
+            GetCurrentPlayer(Game1.joueurs[Game1.tourActuel % Game1.nbjoueurs]);
             GameData.SpriteBatch.Draw(currentPlayer.Pion.ImagePerso,
                 new Rectangle((int)Position.X + 2, (int)Position.Y + 347 + 10, 200, 200),
                 currentPlayer.Pion.Portrait, Color.White);
@@ -186,11 +185,11 @@ namespace JeuDeLOie
         #endregion
 
         #region Gestion du bouton et des dés
-        string textebouton;
+        public static string textebouton;
         bool deslances;
         Rectangle rectBouton;
         Color colorbouton;
-        Dices dices;
+        public static Dices dices;
         bool intersectsMouse;
         public int DicesResult { get; set; }
 
@@ -258,7 +257,7 @@ namespace JeuDeLOie
                 if (!dices.IsRolling /* && FIXME */)
                 {
                     deslances = false;
-                    textebouton = "        Fin de tour";
+                    //textebouton = "        Fin de tour";
                 }
             }
             #endregion

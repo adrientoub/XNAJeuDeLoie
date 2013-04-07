@@ -44,7 +44,7 @@ namespace JeuDeLOie
             _case = 0;
             cooldown = 0;
             lastDiceLaunch = 0;
-
+            firstLaunchOfTurn = true;
             // on place son pion au bon endroit
         }
         #endregion
@@ -79,7 +79,7 @@ namespace JeuDeLOie
                             break;
                         }
                     }
-                    cooldown = int.MaxValue; 
+                    cooldown = int.MaxValue;
                     break;
                 case Event.Puits:
                     for (int i = 0; i < Game1.joueurs.Length; i++)
@@ -96,29 +96,87 @@ namespace JeuDeLOie
                     // Activer la win
                     break;
             }
+            pion.ChangeCase(_case);
         }
         #endregion
 
         #region UPDATE & DRAW
-        public void Update(int tourActuel)
+        bool notDisplacedYet;
+        bool firstLaunchOfTurn;
+        bool eventApplyed;
+
+        public bool Update(int tourActuel)
         {
-            if (tour == tourActuel)
+            if (tour == tourActuel % Game1.nbjoueurs)
             {
-                if (cooldown >= 0)
+                if (firstLaunchOfTurn)
+                {
+                    notDisplacedYet = true;
+                    firstLaunchOfTurn = false;
+                    eventApplyed = false;
+                }
+
+                if (cooldown > 0)
                 {
                     cooldown--;
+                    firstLaunchOfTurn = true;
+                    return true;
                 }
                 else
                 {
-                    // Lance les dés.
-                    // _case est modifié
-                    // lastDiceLaunch est modifié
-                    Evenements evenement = new Evenements(Game1.plate.Tab[_case].Evenement);
-                    ApplyEvent(evenement);
+                    if (!Interface.dices.IsRolling && !Interface.dices.IsInit && notDisplacedYet)
+                    {
+                        lastDiceLaunch = Interface.dices.DicesResult;
+                        if (_case + lastDiceLaunch >= 63)
+                        {
+                            // FIX ME
+                        }
+                        else
+                        {
+                            if (Game1.plate.Tab[_case + lastDiceLaunch].Evenement == Event.Nothing)
+                            {
+                                for (int i = 0; i < Game1.joueurs.Length; i++)
+                                {
+                                    if (Game1.joueurs[i].Case == _case + lastDiceLaunch)
+                                    {
+                                        // Ne pas se déplacer.
+                                        eventApplyed = true;
+                                        return false;
+                                    }
+                                }
+                            }
+                            _case += lastDiceLaunch;
+                        }
+                        pion.ChangeCase(_case);
+                        notDisplacedYet = false;
+                    }
+
+                    if (!pion.IsDeplacing && !notDisplacedYet && !eventApplyed)
+                    {
+                        Evenements evenement = new Evenements(Game1.plate.Tab[_case].Evenement);
+                        ApplyEvent(evenement);
+                        eventApplyed = true;
+                    }
+
+                    if (!pion.IsDeplacing && eventApplyed)
+                    {
+                        Evenements evenement = new Evenements(Game1.plate.Tab[_case].Evenement);
+                        if (evenement.E != Event.Nothing)
+                        {
+                            eventApplyed = false;
+                            return false;
+                        }
+                        firstLaunchOfTurn = true;
+                        Interface.textebouton = "Lancer les dés";
+                        Interface.dices.ReInit();
+                        // Ajouter dans l'interface quelque chose qui dise qu'il change de case
+                        return true;
+                    }
                 }
             }
 
             pion.Update();
+            return false;
         }
 
         public void Draw()

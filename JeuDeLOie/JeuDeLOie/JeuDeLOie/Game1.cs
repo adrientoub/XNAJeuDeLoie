@@ -158,8 +158,7 @@ namespace JeuDeLOie
                     if (isFirstTimeCharacter)
                     {
                         joueurs = new Joueur[nbjoueurs];
-                        isFirstTimeCharacter = false;
-                        // A supprimer quand on aura fini la selection. 
+                        isFirstTimeCharacter = false; 
                         compteperso = 0;
                     }
 
@@ -212,7 +211,11 @@ namespace JeuDeLOie
 
                     foreach (var j in joueurs)
                     {
-                        j.Update(tourActuel);
+                        if (j.Update(tourActuel))
+                        {
+                            // Ajouter un message et changer le tour
+                            tourActuel++;
+                        }
                     }
 
                     interf.Update();

@@ -27,7 +27,12 @@ namespace JeuDeLOie
         }
 
         public void ReInit()
-        { result = 1; jet = 0; i = 0; }
+        {
+            Interface.textebouton = "     Lancer les dés";
+            result = 1;
+            jet = 0;
+            i = 0;
+        }
 
         public void RollDice()
         {
@@ -75,6 +80,7 @@ namespace JeuDeLOie
         public int DicesResult { get { return Result; } }
         bool isRolling, isInit;
         public bool IsRolling { get { return isRolling; } }
+        public bool IsInit { get { return isInit; } }
         Rectangle position, position2; // position2 est celle du deuxième dé
         #endregion
 

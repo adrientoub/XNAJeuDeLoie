@@ -37,6 +37,7 @@ namespace JeuDeLOie
         int casedepX, casedepY;
 
         bool isDeplacing;
+        public bool IsDeplacing { get { return isDeplacing; } }
 
         #endregion
 
@@ -339,6 +340,26 @@ namespace JeuDeLOie
 
         #endregion
 
+        public void ChangeCase(int newcase)
+        {
+            if (newcase == 0 && previousCase == null)
+            {
+
+            }
+            else if (newcase == 0)
+            {
+                ChangeCaseRetourCaseDep();
+            }
+            else if (previousCase == null || previousCase.Numero < newcase)
+            {
+                ChangeCaseAvance(newcase);
+            }
+            else if (previousCase.Numero > newcase)
+            {
+                ChangeCaseRecule(newcase);
+            }
+        }
+
         // animation des pieds
         int timer;
         public void BougeLesPieds()
@@ -352,10 +373,6 @@ namespace JeuDeLOie
         #region UPDATE & DRAW
         public void Update()
         {
-            if (GameData.MouseState.LeftButton == ButtonState.Pressed && GameData.PreviousMouseState != GameData.MouseState)
-                ChangeCaseAvance(35);
-            if (GameData.MouseState.RightButton == ButtonState.Pressed && GameData.PreviousMouseState != GameData.MouseState)
-                ChangeCaseRecule(5);
             AnimationChangeCaseAvance();
             AnimationChangeCaseRetourCaseDep();
             AnimationChangeCaseRecule();
