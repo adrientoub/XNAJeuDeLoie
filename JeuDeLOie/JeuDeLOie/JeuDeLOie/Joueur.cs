@@ -190,7 +190,7 @@ namespace JeuDeLOie
                     if (!pion.IsMoving && eventApplyed)
                     {
                         Evenements evenement = new Evenements(Game1.plate.Tab[_case].Evenement);
-                        if (evenement.E != Event.Nothing)
+                        if (evenement.E != Event.Nothing || evenement.E != Event.CaseDep)
                         {
                             eventApplyed = false;
                             pion.Update();
