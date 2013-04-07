@@ -71,7 +71,7 @@ namespace JeuDeLOie
         /// </summary>
         protected override void Initialize()
         {
-            CurrentGameState = GameState.Victory;
+            CurrentGameState = GameState.Title;
             // TODO: Add your initialization logic here
 
             tourActuel = 0;
