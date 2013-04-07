@@ -227,6 +227,10 @@ namespace JeuDeLOie
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                         CurrentGameState = GameState.Recette;
                     break;
+                case GameState.Recette:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                        this.Exit();
+                    break;
             }
             GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);
