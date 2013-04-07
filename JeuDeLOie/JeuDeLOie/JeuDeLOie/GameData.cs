@@ -27,6 +27,8 @@ namespace JeuDeLOie
         public static Random Random = new Random();
 
         public static GameTime GameTime;
+
+        public static KeyboardState presentKey, pastKey;
  
     }
 }

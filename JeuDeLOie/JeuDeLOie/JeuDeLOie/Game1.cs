@@ -71,7 +71,7 @@ namespace JeuDeLOie
         /// </summary>
         protected override void Initialize()
         {
-            CurrentGameState = GameState.Title;
+            CurrentGameState = GameState.Victory;
             // TODO: Add your initialization logic here
 
             tourActuel = 0;
@@ -135,6 +135,7 @@ namespace JeuDeLOie
             GameData.MouseState = Mouse.GetState();
             GameData.GameTime = gameTime;
             MouseState mouse = Mouse.GetState();
+            GameData.presentKey = Keyboard.GetState();
             switch (CurrentGameState)
             {
                 case GameState.Title:
@@ -255,14 +256,15 @@ namespace JeuDeLOie
                     interf.Update();
                     break;
                 case GameState.Victory:
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    if (GameData.presentKey.IsKeyDown(Keys.Enter) && GameData.pastKey.IsKeyUp(Keys.Enter))
                         CurrentGameState = GameState.Recette;
                     break;
                 case GameState.Recette:
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    if (GameData.presentKey.IsKeyDown(Keys.Enter) && GameData.pastKey.IsKeyUp(Keys.Enter))
                         this.Exit();
                     break;
             }
+            GameData.pastKey = GameData.presentKey;
             GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);
         }

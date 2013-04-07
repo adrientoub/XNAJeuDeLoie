@@ -1,8 +1,8 @@
 Content\texturecaseJDlO.xnb
 Content\texturedesJDlO.xnb
-Content\SpriteFont.xnb
 Content\infosJDlO.xnb
 Content\textureinfJDlO.xnb
+Content\SpriteFont.xnb
 Content\Menu.xnb
 Content\PlayButton.xnb
 Content\QuitButton.xnb
@@ -26,10 +26,10 @@ Content\Pions\MooglePion.xnb
 Content\Sons\moogle1.xnb
 Content\Sons\croco1.xnb
 Content\Sons\mai1.xnb
+Content\Sons\jeu.xnb
 Content\Sons\conan1.xnb
 Content\Sons\debut.xnb
-Content\Sons\jeu.xnb
 Content\Sons\jeu1.xnb
-Content\Sons\debut.wma
 Content\Sons\jeu.wma
+Content\Sons\debut.wma
 Content\Sons\jeu1.wma
