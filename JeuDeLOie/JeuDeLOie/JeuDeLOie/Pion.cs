@@ -12,12 +12,16 @@ namespace JeuDeLOie
     {
 
         #region FIELDS
+        /* Position du Pion */
         Rectangle position;
         public Rectangle Position { get { return position; } set { position = value; } }
+
+        /* Dimensions du Pion */
         int widthpion, heightpion;
         public int WidthPion { get { return widthpion; } }
         public int HeightPion { get { return heightpion; } }
 
+        /* Caractéristiques visuelles du Pion, selon le personnage qu'il représente */
         Texture2D pionPerso;
         public Texture2D PionPerso { get { return pionPerso; } }
         Texture2D imagePerso;
@@ -25,17 +29,20 @@ namespace JeuDeLOie
         Rectangle portrait;
         public Rectangle Portrait { get { return portrait; } }
 
+        /* Permettent de savoir où le pion va se diriger */
         Dirct direction;
         Case positionCase;
         Case previousCase;
         Case nextCase;
         Case newCase;
 
+        /* Variables utilisées pour l'animation du Pion */
         int line, column;
         public int Line { get { return line; } }
         public int Column { get { return column; } }
         int casedepX, casedepY;
 
+        /* Permettent de connaître l'état du Pion */
         bool isDeplacing;
         public bool IsDeplacing { get { return isDeplacing; } }
         bool isMoving;
@@ -44,6 +51,11 @@ namespace JeuDeLOie
         #endregion
 
         #region CONSTRUCTOR
+        /// <summary>
+        /// Construit un Pion associé au personnage donné en paramètre, ainsi que son tour de jeu
+        /// </summary>
+        /// <param name="namePerso">nom du personnage que Pion représentera</param>
+        /// <param name="tour">tour auquel Pion jouera</param>
         public Pion(string namePerso, int tour)
         {
             // Initialise les bonnes images et les rectangles selon le perso choisi
@@ -75,14 +87,18 @@ namespace JeuDeLOie
                     portrait = new Rectangle(0, 0, 388, 388);
                     break;
             }
-            positionCase = Game1.plate.Tab[0];
-            nextCase = Game1.plate.Tab[1];
-            previousCase = null;
+
+            // Initialisation des cases
+            positionCase = Game1.plate.Tab[0]; // case où est actuellement le pion
+            nextCase = Game1.plate.Tab[1]; // case qui suit positionCase
+            previousCase = null; // case qui précède positionCase
 
             // on place le pion au bon endroit sur la case de départ
             casedepY = nextCase.Position.Y + GameData.CaseHeight / 2;
             casedepX = nextCase.Position.X - 2 - GameData.CaseWidth + GameData.CaseWidth / 2;
             position = new Rectangle(casedepX, casedepY, widthpion, heightpion);
+
+            // Initialisation pour l'animation et la direction du déplacement
             line = 3; column = 1;
             direction = Dirct.Droite; // on commence par aller à droite
         }
@@ -90,32 +106,36 @@ namespace JeuDeLOie
 
         #region METHODS
         #region AVANCE
-        int newX, newY;
+        /* Méthodes et variable qui permettront la progression avant du Pion */
+
         bool isDeplacingAvance;
         public bool IsDeplacingAvance { get { return isDeplacingAvance; } }
 
-        // On donne au pion sa prochaine destination
+        /// <summary>
+        ///  On donne au pion sa prochaine destination
+        /// </summary>
+        /// <param name="newcase">case de destination</param>
         public void ChangeCaseAvance(int newcase)
         {
             if (!isDeplacing)
             {
                 isDeplacingAvance = true;
                 newCase = Game1.plate.Tab[newcase];
-                newX = newCase.Position.X + GameData.CaseWidth / 2;
-                newY = newCase.Position.Y + GameData.CaseHeight / 2;
                 timer = 0;
                 column = 1;
             }
         }
 
-        // tant que le pion n'est pas sur la nouvelle case, on continue d'avancer
+        /// <summary>
+        /// Lance une progression avant du Pion, si il doit la faire
+        /// </summary>
         public void AnimationChangeCaseAvance()
-        {
-            if (isDeplacingAvance)
+        {// tant que le pion n'est pas sur la nouvelle case, on continue d'avancer
+            if (isDeplacingAvance) // si le pion avance
             {
-                BougeLesPieds();
+                BougeLesPieds(); // animation
 
-                // puis on avance selon la direction
+                // On avance selon la direction
                 switch (direction)
                 {
                     case Dirct.Bas: position.Y++;
@@ -128,9 +148,11 @@ namespace JeuDeLOie
                         break;
                 }
 
-                // lorsqu'on est sur une nouvelle case
+                // lorsqu'on a atteint une nouvelle case
                 if (nextCase != null && position.X == nextCase.Position.X + GameData.CaseWidth / 2 && position.Y == nextCase.Position.Y + GameData.CaseHeight / 2)
                 {
+                    /* On change les données de la case où il se situe, et celle qui sont adjacentes */
+                    // si on est arrivé sur une case, la prochaine est la suivante, et l'actuelle est la précédente
                     previousCase = positionCase; // la case previous est la précedente
                     positionCase = nextCase;
                     if (nextCase.Numero != Game1.plate.Tab.Length - 1)
@@ -138,11 +160,10 @@ namespace JeuDeLOie
                         nextCase = Game1.plate.Tab[nextCase.Numero + 1];
                     }
                     else
-                    {
+                    { // cas où il arrive sur l'arrivée
                         isDeplacingAvance = false;
                         nextCase = null;
-                    }
-                    // si on est arrivé sur une case, la prochaine est la suivante, et l'actuelle est la précédente
+                    }                    
 
                     // et si elle est à un virage, on change de direction
                     if (positionCase.isTurning)
@@ -164,34 +185,37 @@ namespace JeuDeLOie
                         }
                     }
 
-                    // Lorsqu'on est arrivé, on s'arrête et on se "tourne" du bon sens
+                    // Lorsqu'on est arrivé, on s'arrête
                     if (positionCase == newCase)
                     {
                         isDeplacingAvance = false;
                         column = 1;
                     }
                 }
-
             }
-
         }
         #endregion
 
         #region RECULE (pour les petites distances)
+        /* Méthodes et variable qui permettront la progression avant du Pion */
+
         bool isDeplacingRecule;
         public bool IsDeplacingRecule { get { return isDeplacingRecule; } }
 
-        // On donne au pion sa prochaine destination
+        /// <summary>
+        ///  On donne au pion sa prochaine destination
+        /// </summary>
+        /// <param name="newcase">case de destination</param>
         public void ChangeCaseRecule(int newcase)
         {
             if (!isDeplacing)
             {
                 isDeplacingRecule = true;
                 newCase = Game1.plate.Tab[newcase];
-                newX = newCase.Position.X + GameData.CaseWidth / 2;
-                newY = newCase.Position.Y + GameData.CaseHeight / 2;
                 timer = 0;
                 column = 1;
+
+                // et on lui donne une nouvelle direction
                 if (positionCase.isTurning)
                 {
                     switch (direction)
@@ -231,13 +255,15 @@ namespace JeuDeLOie
             }
         }
 
-        // tant que le pion n'est pas sur la nouvelle case, on continue d'Reculer
+        /// <summary>
+        /// Lance une progression arrière du Pion, si il doit la faire
+        /// </summary>
         public void AnimationChangeCaseRecule()
-        {
+        {// tant que le pion n'est pas sur la nouvelle case, on continue d'reculer
             if (isDeplacingRecule)
             {
                 BougeLesPieds();
-                // puis on Recule selon la direction
+                // on recule selon la direction
                 switch (direction)
                 {
                     case Dirct.Bas: position.Y++;
@@ -251,17 +277,17 @@ namespace JeuDeLOie
                 }
                 if (previousCase != null && position.X == previousCase.Position.X + GameData.CaseWidth / 2 && position.Y == previousCase.Position.Y + GameData.CaseHeight / 2)
                 {
+                    // si on est arrivé sur une case, la prochaine est la suivante, et l'actuelle est la précédente
                     nextCase = positionCase;
                     positionCase = previousCase;
-
                     if (previousCase.Numero != 0)
                         previousCase = Game1.plate.Tab[previousCase.Numero - 1];
                     else
-                    {
+                    {// cas où on arrive sur la première case
                         isDeplacingRecule = false;
                         previousCase = null;
                     }
-                    // si on est arrivé sur une case, la prochaine est la suivante, et l'actuelle est la précédente
+                    
 
                     // et si elle est à un virage, on change de direction
                     if (positionCase.isTurning)
@@ -318,17 +344,21 @@ namespace JeuDeLOie
                                 case Dirct.Haut: direction = Dirct.Bas;
                                     break;
                             }
-
                     }
                 }
             }
-
         }
         #endregion
 
         #region RETOUR CASE DEP (quasi téléportation)
+        /* Méthodes et variable qui renvoient le Pion à la case de départ */
+
         bool retourDep;
         public bool RetourDep { get { return retourDep; } }
+
+        /// <summary>
+        /// Enclenche le retour à la case de départ du Pion
+        /// </summary>
         public void ChangeCaseRetourCaseDep()
         {
             if (!isDeplacing)
@@ -338,6 +368,10 @@ namespace JeuDeLOie
                 column = 1;
             }
         }
+
+        /// <summary>
+        /// Lance le retour du Pion à la case de départ, si il doit le faire
+        /// </summary>
         public void AnimationChangeCaseRetourCaseDep()
         {
             if (retourDep)
@@ -346,6 +380,8 @@ namespace JeuDeLOie
                     position.X--;
                 if (position.Y != casedepY)
                     position.Y++;
+
+                // Lorsqu'on y est, on réinitialise les variables du Pion, pour qu'elles correspondent à celle de la case de départ
                 if (position.X == casedepX && position.Y == casedepY)
                 {
                     retourDep = false;
@@ -359,12 +395,14 @@ namespace JeuDeLOie
 
         #endregion
 
+        /// <summary>
+        /// Enclenche le changement de case, selon s'il faut avancer ou reculer
+        /// </summary>
+        /// <param name="newcase">case de destination</param>
         public void ChangeCase(int newcase)
         {
             if ((positionCase != null && newcase == positionCase.Numero) || (newcase == 0 && positionCase == null))
-            {
-
-            }
+            {            }
             else if (newcase == 0)
             {
                 ChangeCaseRetourCaseDep();
@@ -381,8 +419,14 @@ namespace JeuDeLOie
             isMoving = isDeplacingAvance || isDeplacingRecule || retourDep;
         }
 
-        // animation des pieds
+        #region ANIMATION
+        /* Méthode et variable qui permmettent l'animation du Pion, lors de son déplacement */
+
         int timer;
+
+        /// <summary>
+        /// Lance l'animation du Pion
+        /// </summary>
         public void BougeLesPieds()
         {
             timer++;
@@ -390,8 +434,12 @@ namespace JeuDeLOie
                 column = (column + 1) % 3;
         }
         #endregion
+        #endregion
 
         #region UPDATE & DRAW
+        /// <summary>
+        /// Update du Pion, selon s'il change de position ou pas
+        /// </summary>
         public void Update()
         {
             AnimationChangeCaseAvance();
@@ -402,6 +450,9 @@ namespace JeuDeLOie
             isMoving = isDeplacing;
         }
 
+        /// <summary>
+        /// Dessine le Pion sur la case ou l'endroit où il doit être
+        /// </summary>
         public void Draw()
         {
             GameData.SpriteBatch.Draw(pionPerso, new Rectangle(position.X - widthpion / 2, position.Y - heightpion / 2, position.Width, position.Height),

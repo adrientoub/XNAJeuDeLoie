@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Content;
 
 namespace JeuDeLOie
 {
+    /// <summary>
+    /// Classe qui contient toutes les propriétés statiques, chargées en début de jeu
+    /// </summary>
     public class ContentLoad
     {
         /* TEXTURE CASE */  

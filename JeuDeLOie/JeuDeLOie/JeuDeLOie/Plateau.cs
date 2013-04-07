@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace JeuDeLOie
 {
+    /// <summary>
+    /// Enumération qui permet de savoir dans quelle direction on va
+    /// </summary>
     public enum Dirct
     {
         Droite,
@@ -15,14 +18,21 @@ namespace JeuDeLOie
         Haut,
     }
 
+    /// <summary>
+    /// Classe qui crée un Plateau de jeu de l'Oie : 63 Cases, avec Evenements, disposées en spirale
+    /// </summary>
     public class Plateau
     {
         #region FIELDS
+        // Tableau où seront situées toutes les Cases
         Case[] tab;
         public Case[] Tab { get { return tab; } }
         #endregion
 
         #region CONSTRUCTOR
+        /// <summary>
+        /// Construit un Plateau de 63 Cases avec leur Evenement associé, disposées en spirale
+        /// </summary>
         public Plateau()
         {
             tab = new Case[63];
@@ -33,17 +43,25 @@ namespace JeuDeLOie
         #endregion
 
         #region METHODS
-        bool tourne;
+        bool tourne; // permet de savoir si la Case qu'on construit se situe à un virage
+
+       /// <summary>
+       /// Construit une spiral de i Cases
+       /// </summary>
+       /// <param name="i">nombre de Cases à intégrer à la spirale de Cases</param>
         void ConstructionPositionSpirale(int i)
         {
+            // Initialisation des variables qui serviront à la construction d'une spirale de Cases
             Dirct dir = Dirct.Droite;
             Vector2 pos = new Vector2(GameData.PreferredBackBufferWidth/4, GameData.PreferredBackBufferHeight / 2.5f);
             int j = 0;
+
             while(i >= 0)
             {
                 j++;
+
                 for (int k = 0; k < j; k++)
-                {
+                { // contruit une ligne
                     tab[i - 1] = new Case(new Rectangle((int)pos.X,(int)pos.Y, GameData.CaseWidth, GameData.CaseHeight), Event.Nothing, i-1, tourne);
                     tourne = false;
                     switch ((int)dir)
@@ -61,7 +79,10 @@ namespace JeuDeLOie
                     if (i == 0)
                         return;
                 }
+
+                // a la fin de la ligne, on change de direction pour la suivante, et la prochaine Case qui sera construire sera spécifiée comme "virage"
                 tourne = true;
+
                 switch ((int)dir)
                 {
                     case 0: dir = Dirct.Bas;
@@ -76,12 +97,20 @@ namespace JeuDeLOie
             }
         
         }
+
+        /// <summary>
+        /// Ajoute les Cases à Evenement Oie toutes les 9 Cases du tableau de Cases du Plateau
+        /// </summary>
         void ConstructionCaseGoose()
         {
             for (int i = 1; i < 55; i++)
                 if (i % 9 == 0)
                     tab[i] = new Case(tab[i].Position, Event.Oie, i, tab[i].isTurning);
         }
+
+        /// <summary>
+        /// Ajoute les Cases à Evenement de bonus ou de malus dans le tableau de Cases du Plateau
+        /// </summary>
         void ConstructionCaseEvent()
         {
             tab[0] = new Case(tab[0].Position, Event.CaseDep, 0, tab[0].isTurning);
@@ -97,20 +126,23 @@ namespace JeuDeLOie
         #endregion
 
         #region UPDATE & DRAW
+
+        /// <summary>
+        /// Update de Plateau update chaque Case contenue dans son tableau de Cases
+        /// </summary>
         public void Update()
         {
             foreach (Case Cases in tab)
-            {
                 Cases.Update();
-            }
         }
 
+        /// <summary>
+        /// Dessine toutes les Cases contenues dans le tableau de Cases du Plateau
+        /// </summary>
         public void Draw()
         {
             foreach (Case Cases in tab)
-            {
                 Cases.Draw();
-            }
         }
         #endregion
     }

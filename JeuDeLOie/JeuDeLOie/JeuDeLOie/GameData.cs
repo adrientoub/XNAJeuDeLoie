@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework;
 
 namespace JeuDeLOie
 {
+    /// <summary>
+    /// Classe qui regroupe les propriétés statiques du jeu
+    /// </summary>
     public static class GameData
     {
         public static ContentManager Content;
