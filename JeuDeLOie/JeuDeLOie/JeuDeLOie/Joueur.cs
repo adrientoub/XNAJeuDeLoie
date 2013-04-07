@@ -28,12 +28,6 @@ namespace JeuDeLOie
 
         Pion pion;
         public Pion Pion { get { return pion; } }
-
-        #region Trucs qui ne serviront surement pas
-        //bool versArr; // direction, si il va vers l'arrivée, ou l'autre sens
-        string name;
-        public string Name { get { return name; } }
-        #endregion
         #endregion
 
         #region CONSTRUCTOR

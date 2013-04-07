@@ -92,9 +92,7 @@ namespace JeuDeLOie
         int nombrePlayer;
         string textenbplayer;
         string texteclassementjoueur;
-
-        List<Joueur> listPlayer;
-
+        
         /// <summary>
         /// Initialise les données générales du jeu, selon la sélection faite par les utilisatuers
         /// </summary>
