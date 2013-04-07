@@ -32,6 +32,7 @@ namespace JeuDeLOie
         SoundEffect croco;
         SoundEffect moogle;
         Song ambiancejeuentiere;
+        public static Song sonVictoire;
 
         Rectangle crocorec;
         Rectangle conanrec;
@@ -101,6 +102,7 @@ namespace JeuDeLOie
             croco = Content.Load<SoundEffect>("Sons/croco1");
             moogle = Content.Load<SoundEffect>("Sons/moogle1");
             ambiancejeuentiere = Content.Load<Song>("Sons/jeu1");
+            sonVictoire = Content.Load<Song>("Sons/victoire");
             MediaPlayer.Play(bruitdefond);
             MediaPlayer.IsRepeating = true;
 

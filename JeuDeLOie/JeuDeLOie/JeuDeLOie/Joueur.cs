@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace JeuDeLOie
 {
@@ -49,7 +52,7 @@ namespace JeuDeLOie
             switch (e.E)
             {
                 case Event.Hotel:
-                    cooldown = 2;
+                    cooldown = 3;
                     break;
                 case Event.Labyrinthe:
                     _case = 30;
@@ -86,7 +89,7 @@ namespace JeuDeLOie
                     {
                         if (i != tour && Game1.joueurs[i].Case == 52)
                         {
-                            Game1.joueurs[i].cooldown = 0; // Ajouter quelque chose dans l'interface qui explique qu'il est libre :)
+                            Game1.joueurs[i].cooldown = 0; 
                             break;
                         }
                     }
@@ -97,14 +100,16 @@ namespace JeuDeLOie
                     {
                         if (i != tour && Game1.joueurs[i].Case == 31)
                         {
-                            Game1.joueurs[i].cooldown = 0; // Ajouter quelque chose dans l'interface qui explique qu'il est libre :)
+                            Game1.joueurs[i].cooldown = 0; 
                             break;
                         }
                     }
-                    cooldown = 2;
+                    cooldown = 3;
                     break;
                 case Event.CaseArr:
                     Game1.CurrentGameState = Game1.GameState.Victory;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(Game1.sonVictoire);
                     break;
             }
             pion.ChangeCase(_case);
@@ -193,7 +198,6 @@ namespace JeuDeLOie
                         firstLaunchOfTurn = true;
                         Interface.textebouton = "Lancer les dés";
                         Interface.dices.ReInit();
-                        // Ajouter dans l'interface quelque chose qui dise qu'il change de case
                         return true;
                     }
                 }
