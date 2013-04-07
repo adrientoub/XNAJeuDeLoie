@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JeuDeLOie
 {
-    public class Joueur
+    public class Joueur : IComparable
     {
         #region FIELDS
         int _case;
@@ -198,5 +198,10 @@ namespace JeuDeLOie
             pion.Draw();
         }
         #endregion
+
+        int IComparable.CompareTo(object obj)
+        {
+            return _case.CompareTo(((Joueur)obj)._case);
+        }
     }
 }
