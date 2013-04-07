@@ -32,17 +32,18 @@ namespace JeuDeLOie
         int compteperso;
         string choixjoueur;
 
-        enum GameState
+        public enum GameState
         {
             Title,
             MainMenu,
             Setting,
             Characters,
             Playing,
+            Victory,
         }
 
 
-        GameState CurrentGameState = GameState.Title;
+        public static GameState CurrentGameState = GameState.Title;
 
         public Game1()
         {
@@ -268,6 +269,9 @@ namespace JeuDeLOie
                         ply.Draw();
                     }
                     break;
+                case GameState.Victory:
+                    spriteBatch.Draw(Content.Load<Texture2D>("Victoire"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
+                    break; 
             }
             spriteBatch.End();
 

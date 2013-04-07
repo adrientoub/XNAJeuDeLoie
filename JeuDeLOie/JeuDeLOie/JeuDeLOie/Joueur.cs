@@ -110,7 +110,7 @@ namespace JeuDeLOie
                     cooldown = 2;
                     break;
                 case Event.CaseArr:
-                    // Activer la win
+                    Game1.CurrentGameState = Game1.GameState.Victory;
                     break;
             }
             pion.ChangeCase(_case);
