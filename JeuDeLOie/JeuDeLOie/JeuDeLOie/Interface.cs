@@ -61,6 +61,7 @@ namespace JeuDeLOie
         int nombrePlayer;
         string textenbplayer;
         int nombreTour;
+        string texteclassementjoueur;
 
         List<Joueur> listPlayer;
 
@@ -75,47 +76,78 @@ namespace JeuDeLOie
             }
         }
 
-        public void UpdateDonneesGen(List<Joueur> listplayer)
+        public void UpdateDonneesGen(Joueur[] tabplayer)
         {
-            listplayer.Sort(); // on trie la liste pour avoir l'ordre de progression des joueurs
-            listPlayer = listplayer;
+            List<Joueur> listjoueur = new List<Joueur>();
+            // on trie les joueurs dans une listes pour avoir leur progression
+            listjoueur.Add(tabplayer[0]);
+            for (int i = 1; i < tabplayer.Length; i++)
+            {
+                for (int j = 0; j < listjoueur.Count && tabplayer[i].Case > listjoueur[j].Case; j++)
+                {}
+                listjoueur.Insert(jours, tabplayer[i]);
+            }
+
+            listPlayer = listjoueur;
         }
 
         public void DrawPartieH()
         {
-
-            InitDonneesGen(); /* FIX ME */
             GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textenbplayer, new Vector2(Position.X + 20, Position.Y + 20), Color.White);
+
+            // Classement
+            UpdateDonneesGen(Game1.joueurs);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, "Classement actuel : ", new Vector2(Position.X + 20, Position.Y + 40), Color.White);
+            for (int i = 0; i < nombrePlayer; i++)
+            {
+                GameData.SpriteBatch.Draw(listPlayer[i].Pion.PionPerso, new Rectangle((int)Position.X + 50 + 200*(i/2), (int)Position.Y + 60 + 40*(i%2), listPlayer[i].Pion.WidthPion, listPlayer[i].Pion.HeightPion),
+                    new Rectangle(listPlayer[i].Pion.WidthPion * listPlayer[i].Pion.Column, listPlayer[i].Pion.HeightPion * listPlayer[i].Pion.Line, listPlayer[i].Pion.WidthPion, listPlayer[i].Pion.HeightPion),
+                Color.White);
+                texteclassementjoueur = "#" + (i+1) + "               case :" +listPlayer[i].Case;
+                if(listPlayer[i].CoolDown != 0)
+                {
+                    if(listPlayer[i].CoolDown <= 2)
+                        texteclassementjoueur += "\n                   Malus : attente de " + listPlayer[i].CoolDown + " tours";
+                    else
+                        texteclassementjoueur += "\n                   Malus : attente à l'infini";
+                    }
+                GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, texteclassementjoueur, new Vector2((int)Position.X + 20 + 200 * (i / 2), (int)Position.Y + 65 + 40 * (i % 2)), Color.White);
+            }
+
         }
         #endregion
 
         #region Gestion des données de la partie basse
         Joueur currentPlayer;
         string textejoueur;
-
+        Color colorTextejoueur;
 
         public void GetCurrentPlayer(Joueur player)
         {
             currentPlayer = player;
-            textejoueur = "Joueur " + (currentPlayer.Tour + 1) + ", c'est à ton tour de jouer (:\n";
-            /* FIX ME */
+            if (currentPlayer.CoolDown == 0)
+            { textejoueur = "Joueur " + (currentPlayer.Tour + 1) + ", c'est à ton tour de jouer (:\n"; colorTextejoueur = Color.LimeGreen; }
+            else if (currentPlayer.CoolDown <= 2)
+            { textejoueur = "Joueur " + (currentPlayer.Tour + 1) + ", dommage, il faut encore attendre " + currentPlayer.CoolDown + " tours avant de pouvoir jouer..."; colorTextejoueur = Color.Gold; }
+            else
+            { textejoueur = "Joueur " + (currentPlayer.Tour + 1) + ", vous êtes en Prison ! Impossible d'avancer si on ne vous libère pas D:"; colorTextejoueur = Color.Red; }
         }
 
         public void DrawPartieB()
         {
             // Affichage du portrait du joueur
-            GetCurrentPlayer(Game1.joueurs[0]); /* FIX ME */
+            GetCurrentPlayer(Game1.joueurs[Game1.tourActuel]);
             GameData.SpriteBatch.Draw(currentPlayer.Pion.ImagePerso,
                 new Rectangle((int)Position.X + 2, (int)Position.Y + 347 + 10, 200, 200),
                 currentPlayer.Pion.Portrait, Color.White);
 
             // Affichage du pion du joueur
-            GameData.SpriteBatch.Draw(currentPlayer.Pion.PionPerso, new Vector2(Position.X + 100, Position.Y + 250), 
-                new Rectangle(currentPlayer.Pion.WidthPion * currentPlayer.Pion.Column, currentPlayer.Pion.HeightPion * currentPlayer.Pion.Line, currentPlayer.Pion.WidthPion, currentPlayer.Pion.HeightPion), 
+            GameData.SpriteBatch.Draw(currentPlayer.Pion.PionPerso, new Vector2(Position.X + 100, Position.Y + 250),
+                new Rectangle(currentPlayer.Pion.WidthPion * currentPlayer.Pion.Column, currentPlayer.Pion.HeightPion * currentPlayer.Pion.Line, currentPlayer.Pion.WidthPion, currentPlayer.Pion.HeightPion),
                 Color.White);
 
             // Affichage d'infos écrites
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textejoueur, new Vector2(Position.X + 20, Position.Y + 300 ), Color.Indigo);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textejoueur, new Vector2(Position.X + 20, Position.Y + 300), colorTextejoueur);
             GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, Game1.plate.Tab[currentPlayer.Case].Infos, new Vector2(Position.X + 20 + 300, Position.Y + 190), Color.Indigo);
         }
 
@@ -250,21 +282,14 @@ namespace JeuDeLOie
      *      PARTIE GENERALE (en haut)
      *      - nombre de joueurs
      *      - temps de jeu
-     *      - à quel tour sommes-nous
      *      - le classement des joueurs par rapport à l'arrivée 
-     *      (si on passe sa souris sur un joueur, on accède à certaines de ses infos :  - nom, pion
-     *                                                                                  - position dans le classement, case
-     *                                                                                  - si il a un malus)
+     *      
      *      PARTIE STATUT du current joueur, couleur selon le joueur ? (en bas)
-     *      - nom, pion
-     *      - position dans le classement, case
+     *      - pion
+     *      - case
      *      - si il a un malus
      *      - lancer de dés (bouton)
      *      - fin de tour (bouton)
-     *      - abandonner la partie (bouton) (?)
      * 
-     * */
-
-    /* Doit-elle etre mise à joueur à chaque tour de joueur ou utilise-t-elle directemement les données des joueurs ?
      * */
 }

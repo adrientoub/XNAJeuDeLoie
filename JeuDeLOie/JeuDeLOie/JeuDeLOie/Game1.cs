@@ -20,7 +20,7 @@ namespace JeuDeLOie
         SpriteBatch spriteBatch;
 
         public static Plateau plate;
-        int tourActuel, nbjoueurs;
+        public static int tourActuel, nbjoueurs;
         public static Joueur[] joueurs;
         public bool isFirstTimeCharacter;
         Interface interf;
@@ -202,7 +202,7 @@ namespace JeuDeLOie
 
 
 
-
+                    interf.InitDonneesGen(); // après avoir sélectionné les joueurs, on initialise les données de l'interface de jeu
                     break;
                 case GameState.Playing:
                     // TODO: Add your update logic here

@@ -23,6 +23,7 @@ namespace JeuDeLOie
         public int Tour { get { return tour; } }
 
         int cooldown; // Le nombre de tours que le joueur doit attendre
+        public int CoolDown { get { return cooldown; } }
         int lastDiceLaunch;
 
         Pion pion;
