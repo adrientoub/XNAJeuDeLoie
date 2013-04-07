@@ -118,7 +118,7 @@ namespace JeuDeLOie
             switch (CurrentGameState)
             {
                 case GameState.Title:
-                    if (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                    if ((GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed) || Keyboard.GetState().IsKeyDown(Keys.Enter))
                         CurrentGameState = GameState.MainMenu;
                     break;
 
