@@ -24,6 +24,14 @@ namespace JeuDeLOie
         public static Joueur[] joueurs;
         public bool isFirstTimeCharacter;
         Interface interf;
+        // Sons
+        Song bruitdefond;
+        Song ambiancejeu;
+        SoundEffect mai;
+        SoundEffect conan1;
+        SoundEffect croco;
+        SoundEffect moogle;
+        Song ambiancejeuentiere;
 
         Rectangle crocorec;
         Rectangle conanrec;
@@ -85,6 +93,17 @@ namespace JeuDeLOie
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // Sons
+            bruitdefond = Content.Load<Song>("Sons/debut");
+            ambiancejeu = Content.Load<Song>("Sons/jeu");
+            mai = Content.Load<SoundEffect>("Sons/mai1");
+            conan1 = Content.Load<SoundEffect>("Sons/conan1");
+            croco = Content.Load<SoundEffect>("Sons/croco1");
+            moogle = Content.Load<SoundEffect>("Sons/moogle1");
+            ambiancejeuentiere = Content.Load<Song>("Sons/jeu1");
+            MediaPlayer.Play(bruitdefond);
+            MediaPlayer.IsRepeating = true;
+
             GameData.Content = Content;
             GameData.SpriteBatch = spriteBatch;
             ContentLoad.Load();
@@ -126,6 +145,8 @@ namespace JeuDeLOie
                 case GameState.MainMenu:
                     if (ContentLoad.btnPlay.isClicked == true)
                     {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(ambiancejeu);
                         CurrentGameState = GameState.Setting;
                     }
                     if (ContentLoad.btnQuit.isClicked == true)
@@ -168,12 +189,14 @@ namespace JeuDeLOie
 
                     if (conanrec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
                     {
+                        conan1.Play();
                         joueurs[compteperso] = new Joueur(compteperso, "Conan");
                         compteperso++;
                         conanrec = new Rectangle(0, 0, 0, 0);
                     }
                     else if (crocorec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
                     {
+                        croco.Play();
                         joueurs[compteperso] = new Joueur(compteperso, "Crocodile");
                         compteperso++;
                         crocorec = new Rectangle(0, 0, 0, 0);
@@ -181,18 +204,26 @@ namespace JeuDeLOie
 
                     else if (mairec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
                     {
+                        mai.Play();
                         joueurs[compteperso] = new Joueur(compteperso, "Mai");
                         compteperso++;
                         mairec = new Rectangle(0, 0, 0, 0);
                     }
                     else if (mooglerec.Intersects(new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 3, 3)) && (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed))
                     {
+                        moogle.Play();
                         joueurs[compteperso] = new Joueur(compteperso, "Moogle");
                         compteperso++;
                         mooglerec = new Rectangle(0, 0, 0, 0);
                     }
                     if (compteperso == nbjoueurs)
+                    {
                         CurrentGameState = GameState.Playing;
+
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(ambiancejeuentiere);
+                        MediaPlayer.IsRepeating = true;
+                    }
                     else if (compteperso == 0)
                         choixjoueur = "Joueur1, veuillez sélectonner votre personnage";
                     else if (compteperso == 1)
@@ -265,10 +296,10 @@ namespace JeuDeLOie
 
                 case GameState.Characters:
                     spriteBatch.Draw(Content.Load<Texture2D>("SelectionPerso"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Moogle"), mooglerec, Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Mai"), mairec, Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), crocorec, Color.White);
-                    spriteBatch.Draw(Content.Load<Texture2D>("Conan"), conanrec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Personnages/Moogle"), mooglerec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Personnages/Mai"), mairec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Personnages/Crocodile"), crocorec, Color.White);
+                    spriteBatch.Draw(Content.Load<Texture2D>("Personnages/Conan"), conanrec, Color.White);
                     GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, choixjoueur, new Vector2(GameData.PreferredBackBufferWidth / 2 - 125, 100), Color.Black);
                     break;
                 case GameState.Playing:

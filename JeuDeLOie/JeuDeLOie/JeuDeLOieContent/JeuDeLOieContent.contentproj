@@ -78,12 +78,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoyPion.png">
+    <Compile Include="Pions\BoyPion.png">
       <Name>BoyPion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="CrocoPion.png">
+    <Compile Include="Pions\CrocoPion.png">
       <Name>CrocoPion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -97,22 +97,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="conan.png">
+    <Compile Include="Personnages\conan.png">
       <Name>conan</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Crocodile.png">
+    <Compile Include="Personnages\Crocodile.png">
       <Name>Crocodile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Mai.png">
+    <Compile Include="Personnages\Mai.png">
       <Name>Mai</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Moogle.png">
+    <Compile Include="Personnages\Moogle.png">
       <Name>Moogle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -141,12 +141,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GirlPion.png">
+    <Compile Include="Pions\GirlPion.png">
       <Name>GirlPion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="MooglePion.png">
+    <Compile Include="Pions\MooglePion.png">
       <Name>MooglePion</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -195,6 +195,51 @@
       <Name>Ciel</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\moogle1.wav">
+      <Name>moogle1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\croco1.wav">
+      <Name>croco1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Sons\jeu.mp3">
+      <Name>jeu</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="Sons\mai1.wav">
+      <Name>mai1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\jeu1.wav">
+      <Name>jeu1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\debut.mp3">
+      <Name>debut</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\conan1.wav">
+      <Name>conan1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

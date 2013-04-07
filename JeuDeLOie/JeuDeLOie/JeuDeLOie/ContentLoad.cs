@@ -35,10 +35,10 @@ namespace JeuDeLOie
             SpriteFonte = GameData.Content.Load<SpriteFont>("SpriteFont");
             
             personnages = new List<Texture2D>();
-            personnages.Add(GameData.Content.Load<Texture2D>("BoyPion"));
-            personnages.Add(GameData.Content.Load<Texture2D>("CrocoPion"));
-            personnages.Add(GameData.Content.Load<Texture2D>("GirlPion"));
-            personnages.Add(GameData.Content.Load<Texture2D>("MooglePion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("Pions/BoyPion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("Pions/CrocoPion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("Pions/GirlPion"));
+            personnages.Add(GameData.Content.Load<Texture2D>("Pions/MooglePion"));
 
             
             screenHeight = Game1.graphics.PreferredBackBufferHeight;

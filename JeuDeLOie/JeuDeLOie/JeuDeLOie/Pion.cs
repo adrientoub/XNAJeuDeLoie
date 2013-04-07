@@ -47,7 +47,7 @@ namespace JeuDeLOie
         public Pion(string namePerso, int tour)
         {
             // Initialise les bonnes images et les rectangles selon le perso choisi
-            imagePerso = GameData.Content.Load<Texture2D>(namePerso);
+            imagePerso = GameData.Content.Load<Texture2D>("Personnages/" + namePerso);
             switch (namePerso)
             {
                 case "Crocodile":
