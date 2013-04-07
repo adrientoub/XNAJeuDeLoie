@@ -40,6 +40,7 @@ namespace JeuDeLOie
             Characters,
             Playing,
             Victory,
+            Recette,
         }
 
 
@@ -62,7 +63,7 @@ namespace JeuDeLOie
         /// </summary>
         protected override void Initialize()
         {
-            CurrentGameState = GameState.Title;
+            CurrentGameState = GameState.Victory;
             // TODO: Add your initialization logic here
 
             tourActuel = 0;
@@ -222,6 +223,10 @@ namespace JeuDeLOie
 
                     interf.Update();
                     break;
+                case GameState.Victory:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                        CurrentGameState = GameState.Recette;
+                    break;
             }
             GameData.PreviousMouseState = GameData.MouseState;
             base.Update(gameTime);
@@ -273,6 +278,9 @@ namespace JeuDeLOie
                 case GameState.Victory:
                     spriteBatch.Draw(Content.Load<Texture2D>("Victoire"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
                     break; 
+                case GameState.Recette:
+                    spriteBatch.Draw(Content.Load<Texture2D>("Recette"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
+                    break;
             }
             spriteBatch.End();
 
