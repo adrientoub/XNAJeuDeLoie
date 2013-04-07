@@ -124,7 +124,7 @@ namespace JeuDeLOie
         /// Renvoit le résultat de l'addition des deux dés
         /// </summary>
         void NewResult()
-        { Result = /*d1.Result + d2.Result*/ 41; }
+        { Result = d1.Result + d2.Result; }
         #endregion
 
         #region UPDATE & DRAW
