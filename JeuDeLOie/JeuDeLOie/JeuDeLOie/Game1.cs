@@ -246,6 +246,7 @@ namespace JeuDeLOie
 
                     break;
                 case GameState.Setting:
+                    spriteBatch.Draw(Content.Load<Texture2D>("ChoixNbJoueurs"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
                     ContentLoad.btn2.Draw(spriteBatch);
                     ContentLoad.btn3.Draw(spriteBatch);
                     ContentLoad.btn4.Draw(spriteBatch);
