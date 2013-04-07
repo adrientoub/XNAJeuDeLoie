@@ -90,7 +90,7 @@ namespace JeuDeLOie
                 case Event.Prison:
                     for (int i = 0; i < Game1.joueurs.Length; i++)
                     {
-                        if (i != tour && Game1.joueurs[i].Case == 51)
+                        if (i != tour && Game1.joueurs[i].Case == 52)
                         {
                             Game1.joueurs[i].cooldown = 0; // Ajouter quelque chose dans l'interface qui explique qu'il est libre :)
                             break;
