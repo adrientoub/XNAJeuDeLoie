@@ -118,7 +118,7 @@ namespace JeuDeLOie
             switch (CurrentGameState)
             {
                 case GameState.Title:
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    if (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                         CurrentGameState = GameState.MainMenu;
                     break;
 
@@ -129,8 +129,8 @@ namespace JeuDeLOie
                     }
                     if (ContentLoad.btnQuit.isClicked == true)
                         Exit();
-                    ContentLoad.btnPlay.Update(mouse, gameTime);
-                    ContentLoad.btnQuit.Update(mouse, gameTime);
+                    ContentLoad.btnPlay.Update(gameTime);
+                    ContentLoad.btnQuit.Update(gameTime);
                     break;
 
                 case GameState.Setting:
@@ -151,9 +151,9 @@ namespace JeuDeLOie
                     }
                     isFirstTimeCharacter = true;
 
-                    ContentLoad.btn2.Update(mouse, gameTime);
-                    ContentLoad.btn3.Update(mouse, gameTime);
-                    ContentLoad.btn4.Update(mouse, gameTime);
+                    ContentLoad.btn2.Update(gameTime);
+                    ContentLoad.btn3.Update(gameTime);
+                    ContentLoad.btn4.Update(gameTime);
                     break;
 
                 case GameState.Characters:

@@ -28,17 +28,17 @@ namespace JeuDeLOie
 
         public bool isClicked;
 
-        public void Update(MouseState mouse, GameTime gametime)
+        public void Update( GameTime gametime)
         {
             KeyboardState KState = Keyboard.GetState();
             rectangle = new Rectangle((int)position.X, (int)position.Y, (int)size.X, (int)size.Y);
 
-            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
+            Rectangle mouseRectangle = new Rectangle(GameData.MouseState.X, GameData.MouseState.Y, 1, 1);
 
             if (mouseRectangle.Intersects(rectangle) || KState.IsKeyDown(Keys.Down))
             {
                 colour = Color.Lime;
-                if (mouse.LeftButton == ButtonState.Pressed) isClicked = true;
+                if (GameData.MouseState.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && GameData.PreviousMouseState.LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed) isClicked = true;
 
             }
             else
