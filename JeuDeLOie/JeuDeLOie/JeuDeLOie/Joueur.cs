@@ -58,14 +58,31 @@ namespace JeuDeLOie
                     cooldown = 2;
                     break;
                 case Event.Labyrinthe:
-                    // TODO: Ajouter déplacement fluide du pion
                     _case = 29;
                     break;
                 case Event.Mort:
                     _case = 0;
                     break;
                 case Event.Oie:
-                    _case += lastDiceLaunch; // Valeur du lancé de dés
+                    if (_case + lastDiceLaunch >= 63)
+                    {
+                        nbCaseToGoBack = _case + lastDiceLaunch - 62;
+                        _case = 62;
+                    }
+                    else
+                    {
+                        if (Game1.plate.Tab[_case + lastDiceLaunch].Evenement == Event.Nothing)
+                        {
+                            for (int i = 0; i < Game1.joueurs.Length; i++)
+                            {
+                                if (Game1.joueurs[i].Case == _case + lastDiceLaunch)
+                                {
+                                    return;
+                                }
+                            }
+                        }
+                        _case += lastDiceLaunch;
+                    } 
                     break;
                 case Event.Pont:
                     _case = 12;
@@ -147,7 +164,6 @@ namespace JeuDeLOie
                                         // Ne pas se déplacer.
                                         notDisplacedYet = false;
                                         eventApplyed = true;
-                                        return false;
                                     }
                                 }
                             }
