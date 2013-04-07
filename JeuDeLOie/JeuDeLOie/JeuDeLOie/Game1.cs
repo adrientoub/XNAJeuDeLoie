@@ -43,7 +43,7 @@ namespace JeuDeLOie
         }
 
 
-        public static GameState CurrentGameState = GameState.Title;
+        public static GameState CurrentGameState;
 
         public Game1()
         {
@@ -62,6 +62,7 @@ namespace JeuDeLOie
         /// </summary>
         protected override void Initialize()
         {
+            CurrentGameState = GameState.Title;
             // TODO: Add your initialization logic here
 
             tourActuel = 0;
