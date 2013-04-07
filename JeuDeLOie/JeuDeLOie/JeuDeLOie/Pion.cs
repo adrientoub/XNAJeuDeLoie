@@ -344,7 +344,7 @@ namespace JeuDeLOie
 
         public void ChangeCase(int newcase)
         {
-            if (newcase == 0 && previousCase == null)
+            if ((positionCase != null && newcase == positionCase.Numero) || (newcase == 0 && positionCase == null))
             {
 
             }
@@ -352,11 +352,11 @@ namespace JeuDeLOie
             {
                 ChangeCaseRetourCaseDep();
             }
-            else if (previousCase == null || previousCase.Numero < newcase)
+            else if (positionCase == null || positionCase.Numero < newcase)
             {
                 ChangeCaseAvance(newcase);
             }
-            else if (previousCase.Numero > newcase)
+            else if (positionCase.Numero > newcase)
             {
                 ChangeCaseRecule(newcase);
             }

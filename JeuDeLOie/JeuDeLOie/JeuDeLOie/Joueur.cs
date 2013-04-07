@@ -122,11 +122,13 @@ namespace JeuDeLOie
                 {
                     cooldown--;
                     firstLaunchOfTurn = true;
+                    Interface.textebouton = "Lancer les dés";
+                    Interface.dices.ReInit();
                     return true;
                 }
                 else
                 {
-                    if (!Interface.dices.IsRolling && !Interface.dices.IsInit && notDisplacedYet)
+                    if (notDisplacedYet && !Interface.dices.IsRolling && !Interface.dices.IsInit)
                     {
                         lastDiceLaunch = Interface.dices.DicesResult;
                         if (_case + lastDiceLaunch >= 63)
@@ -143,6 +145,7 @@ namespace JeuDeLOie
                                     if (Game1.joueurs[i].Case == _case + lastDiceLaunch)
                                     {
                                         // Ne pas se déplacer.
+                                        notDisplacedYet = false;
                                         eventApplyed = true;
                                         return false;
                                     }
