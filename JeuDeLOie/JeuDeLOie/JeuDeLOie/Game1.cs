@@ -272,6 +272,7 @@ namespace JeuDeLOie
                     GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, choixjoueur, new Vector2(GameData.PreferredBackBufferWidth / 2 - 125, 100), Color.Black);
                     break;
                 case GameState.Playing:
+                    spriteBatch.Draw(Content.Load<Texture2D>("Ciel"), new Rectangle(0, 0, ContentLoad.screenWidth, ContentLoad.screenHeight), Color.White);
                     interf.Draw();
                     plate.Draw();
                     foreach (var ply in joueurs)
