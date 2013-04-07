@@ -276,7 +276,26 @@ namespace JeuDeLOie
                     {
                         isDeplacingRecule = false;
                         column = 1;
-                        switch (direction)
+                        if (positionCase.isTurning)
+                        {
+                            switch (direction)
+                            {
+                                case Dirct.Bas: direction = Dirct.Gauche;
+                                    line = 3;
+                                    break;
+                                case Dirct.Droite: direction = Dirct.Bas;
+                                    line = 1;
+                                    break;
+                                case Dirct.Gauche: direction = Dirct.Haut;
+                                    line = 0;
+                                    break;
+                                case Dirct.Haut: direction = Dirct.Droite;
+                                    line = 2;
+                                    break;
+                            }
+                        }
+                        else 
+                            switch (direction)
                         {
                             case Dirct.Bas: direction = Dirct.Haut;
                                 break;
@@ -287,6 +306,7 @@ namespace JeuDeLOie
                             case Dirct.Haut: direction = Dirct.Bas;
                                 break;
                         }
+
                     }
                 }
 

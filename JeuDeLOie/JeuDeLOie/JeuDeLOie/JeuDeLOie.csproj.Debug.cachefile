@@ -1,11 +1,10 @@
 Content\texturecaseJDlO.xnb
 Content\texturedesJDlO.xnb
-Content\infosJDlO.xnb
 Content\SpriteFont.xnb
+Content\infosJDlO.xnb
 Content\textureinfJDlO.xnb
 Content\BoyPion.xnb
 Content\CrocoPion.xnb
-Content\Moogle.xnb
 Content\Menu.xnb
 Content\conan.xnb
 Content\Crocodile.xnb
@@ -13,6 +12,7 @@ Content\Mai.xnb
 Content\PlayButton.xnb
 Content\QuitButton.xnb
 Content\Title.xnb
+Content\Moogle.xnb
 Content\SelectionPerso.xnb
 Content\GirlPion.xnb
 Content\MooglePion.xnb
