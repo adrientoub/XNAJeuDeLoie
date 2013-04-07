@@ -66,8 +66,8 @@ namespace JeuDeLOie
             tourActuel = 0;
             crocorec = new Rectangle(400, 300, 200, 400);
             conanrec = new Rectangle(150, 300, 200, 400);
-            mairec = new Rectangle(650, 300, 200, 400);
-            mooglerec = new Rectangle(900, 400, 150, 300);
+            mairec = new Rectangle(700, 300, 200, 400);
+            mooglerec = new Rectangle(1000, 400, 150, 300);
             choixjoueur = "";
 
             base.Initialize();
@@ -258,7 +258,7 @@ namespace JeuDeLOie
                     spriteBatch.Draw(Content.Load<Texture2D>("Mai"), mairec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Crocodile"), crocorec, Color.White);
                     spriteBatch.Draw(Content.Load<Texture2D>("Conan"), conanrec, Color.White);
-                    GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, choixjoueur, new Vector2(GameData.PreferredBackBufferWidth / 2 - 100, 100), Color.Black);
+                    GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, choixjoueur, new Vector2(GameData.PreferredBackBufferWidth / 2 - 125, 100), Color.Black);
                     break;
                 case GameState.Playing:
                     interf.Draw();
