@@ -36,7 +36,9 @@ namespace JeuDeLOie
             InitInfos();
             this.position = position;
             color = Color.White;
-            colorinfos = Color.Indigo;
+            colorinfos = Color.Purple;
+            colorinfos.R = 62;
+            colorinfos.B = 86;
             colorinfos.A -= 42;
             isTurning = tourne;
         }
