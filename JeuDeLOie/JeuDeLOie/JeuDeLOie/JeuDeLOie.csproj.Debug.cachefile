@@ -18,9 +18,7 @@ Content\Ciel.xnb
 Content\Sons\moogle1.xnb
 Content\Sons\croco1.xnb
 Content\Sons\mai1.xnb
-Content\Sons\jeu1.xnb
 Content\Sons\conan1.xnb
-Content\Sons\jeu.xnb
 Content\Sons\debut.xnb
 Content\Pions\BoyPion.xnb
 Content\Pions\CrocoPion.xnb
@@ -30,6 +28,8 @@ Content\Personnages\conan.xnb
 Content\Personnages\Crocodile.xnb
 Content\Personnages\Mai.xnb
 Content\Personnages\Moogle.xnb
-Content\Sons\jeu1.wma
-Content\Sons\jeu.wma
+Content\Sons\jeu.xnb
+Content\Sons\jeu1.xnb
 Content\Sons\debut.wma
+Content\Sons\jeu.wma
+Content\Sons\jeu1.wma

@@ -210,8 +210,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="Sons\jeu.mp3">
-      <Name>jeu</Name>
+    <Compile Include="Sons\debut.mp3">
+      <Name>debut</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
@@ -222,15 +222,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sons\jeu1.wav">
-      <Name>jeu1</Name>
+    <Compile Include="Sons\jeu.wav">
+      <Name>jeu</Name>
       <Importer>WavImporter</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sons\debut.mp3">
-      <Name>debut</Name>
+    <Compile Include="Sons\jeu1.mp3">
+      <Name>jeu1</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>
