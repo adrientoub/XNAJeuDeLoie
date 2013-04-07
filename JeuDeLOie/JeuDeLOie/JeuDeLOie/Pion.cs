@@ -114,6 +114,20 @@ namespace JeuDeLOie
             if (isDeplacingAvance)
             {
                 BougeLesPieds();
+
+                // puis on avance selon la direction
+                switch (direction)
+                {
+                    case Dirct.Bas: position.Y++;
+                        break;
+                    case Dirct.Droite: position.X++;
+                        break;
+                    case Dirct.Gauche: position.X--;
+                        break;
+                    case Dirct.Haut: position.Y--;
+                        break;
+                }
+
                 // lorsqu'on est sur une nouvelle case
                 if (nextCase != null && position.X == nextCase.Position.X + GameData.CaseWidth / 2 && position.Y == nextCase.Position.Y + GameData.CaseHeight / 2)
                 {
@@ -156,20 +170,6 @@ namespace JeuDeLOie
                         isDeplacingAvance = false;
                         column = 1;
                     }
-                }
-
-
-                // puis on avance selon la direction
-                switch (direction)
-                {
-                    case Dirct.Bas: position.Y++;
-                        break;
-                    case Dirct.Droite: position.X++;
-                        break;
-                    case Dirct.Gauche: position.X--;
-                        break;
-                    case Dirct.Haut: position.Y--;
-                        break;
                 }
 
             }
@@ -237,6 +237,18 @@ namespace JeuDeLOie
             if (isDeplacingRecule)
             {
                 BougeLesPieds();
+                // puis on Recule selon la direction
+                switch (direction)
+                {
+                    case Dirct.Bas: position.Y++;
+                        break;
+                    case Dirct.Droite: position.X++;
+                        break;
+                    case Dirct.Gauche: position.X--;
+                        break;
+                    case Dirct.Haut: position.Y--;
+                        break;
+                }
                 if (previousCase != null && position.X == previousCase.Position.X + GameData.CaseWidth / 2 && position.Y == previousCase.Position.Y + GameData.CaseHeight / 2)
                 {
                     nextCase = positionCase;
@@ -294,36 +306,21 @@ namespace JeuDeLOie
                                     break;
                             }
                         }
-                        else 
+                        else
                             switch (direction)
-                        {
-                            case Dirct.Bas: direction = Dirct.Haut;
-                                break;
-                            case Dirct.Droite: direction = Dirct.Gauche;
-                                break;
-                            case Dirct.Gauche: direction = Dirct.Droite;
-                                break;
-                            case Dirct.Haut: direction = Dirct.Bas;
-                                break;
-                        }
+                            {
+                                case Dirct.Bas: direction = Dirct.Haut;
+                                    break;
+                                case Dirct.Droite: direction = Dirct.Gauche;
+                                    break;
+                                case Dirct.Gauche: direction = Dirct.Droite;
+                                    break;
+                                case Dirct.Haut: direction = Dirct.Bas;
+                                    break;
+                            }
 
                     }
                 }
-
-
-                // puis on Recule selon la direction
-                switch (direction)
-                {
-                    case Dirct.Bas: position.Y++;
-                        break;
-                    case Dirct.Droite: position.X++;
-                        break;
-                    case Dirct.Gauche: position.X--;
-                        break;
-                    case Dirct.Haut: position.Y--;
-                        break;
-                }
-
             }
 
         }

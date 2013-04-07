@@ -95,18 +95,17 @@ namespace JeuDeLOie
             GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textenbplayer, new Vector2(Position.X + 20, Position.Y + 20), Color.White);
 
             // Classement
-            UpdateDonneesGen(Game1.joueurs);
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, "Classement actuel : ", new Vector2(Position.X + 20, Position.Y + 40), Color.White);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, "Progression actuelle : ", new Vector2(Position.X + 20, Position.Y + 40), Color.White);
             for (int i = 0; i < nombrePlayer; i++)
             {
-                GameData.SpriteBatch.Draw(listPlayer[i].Pion.PionPerso, new Rectangle((int)Position.X + 50 + 200*(i/2), (int)Position.Y + 60 + 40*(i%2), listPlayer[i].Pion.WidthPion, listPlayer[i].Pion.HeightPion),
-                    new Rectangle(listPlayer[i].Pion.WidthPion * listPlayer[i].Pion.Column, listPlayer[i].Pion.HeightPion * listPlayer[i].Pion.Line, listPlayer[i].Pion.WidthPion, listPlayer[i].Pion.HeightPion),
+                GameData.SpriteBatch.Draw(Game1.joueurs[i].Pion.PionPerso, new Rectangle((int)Position.X + 50 + 200*(i/2), (int)Position.Y + 60 + 40*(i%2), Game1.joueurs[i].Pion.WidthPion, Game1.joueurs[i].Pion.HeightPion),
+                    new Rectangle(Game1.joueurs[i].Pion.WidthPion * Game1.joueurs[i].Pion.Column, Game1.joueurs[i].Pion.HeightPion * Game1.joueurs[i].Pion.Line, Game1.joueurs[i].Pion.WidthPion, Game1.joueurs[i].Pion.HeightPion),
                 Color.White);
-                texteclassementjoueur = "#" + (i+1) + "               case :" +listPlayer[i].Case;
-                if(listPlayer[i].CoolDown != 0)
+                texteclassementjoueur = "#" + (i+1) + "               case :" +Game1.joueurs[i].Case;
+                if(Game1.joueurs[i].CoolDown != 0)
                 {
-                    if(listPlayer[i].CoolDown <= 2)
-                        texteclassementjoueur += "\n                   Malus : attente de " + listPlayer[i].CoolDown + " tours";
+                    if(Game1.joueurs[i].CoolDown <= 2)
+                        texteclassementjoueur += "\n                   Malus : attente de " + Game1.joueurs[i].CoolDown + " tours";
                     else
                         texteclassementjoueur += "\n                   Malus : attente à l'infini";
                     }
@@ -147,7 +146,7 @@ namespace JeuDeLOie
 
             // Affichage d'infos écrites
             GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, textejoueur, new Vector2(Position.X + 20, Position.Y + 300), colorTextejoueur);
-            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, Game1.plate.Tab[currentPlayer.Case].Infos, new Vector2(Position.X + 20 + 300, Position.Y + 190), Color.Indigo);
+            GameData.SpriteBatch.DrawString(ContentLoad.SpriteFonte, Game1.plate.Tab[currentPlayer.Case].Infos, new Vector2(Position.X + 20 + 280, Position.Y + 190), Color.Indigo);
         }
 
 
@@ -281,7 +280,7 @@ namespace JeuDeLOie
      *      PARTIE GENERALE (en haut)
      *      - nombre de joueurs
      *      - temps de jeu
-     *      - le classement des joueurs par rapport à l'arrivée 
+     *      - la progression des joueurs  
      *      
      *      PARTIE STATUT du current joueur, couleur selon le joueur ? (en bas)
      *      - pion

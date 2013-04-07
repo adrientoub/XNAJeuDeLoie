@@ -58,7 +58,7 @@ namespace JeuDeLOie
                     cooldown = 2;
                     break;
                 case Event.Labyrinthe:
-                    _case = 29;
+                    _case = 30;
                     break;
                 case Event.Mort:
                     _case = 0;
