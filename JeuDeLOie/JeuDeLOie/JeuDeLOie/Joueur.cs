@@ -104,6 +104,7 @@ namespace JeuDeLOie
         bool notDisplacedYet;
         bool firstLaunchOfTurn;
         bool eventApplyed;
+        int nbCaseToGoBack;
 
         public bool Update(int tourActuel)
         {
@@ -114,6 +115,7 @@ namespace JeuDeLOie
                     notDisplacedYet = true;
                     firstLaunchOfTurn = false;
                     eventApplyed = false;
+                    nbCaseToGoBack = 0;
                 }
 
                 if (cooldown > 0)
@@ -129,7 +131,8 @@ namespace JeuDeLOie
                         lastDiceLaunch = Interface.dices.DicesResult;
                         if (_case + lastDiceLaunch >= 63)
                         {
-                            // FIX ME
+                            nbCaseToGoBack = _case + lastDiceLaunch - 62;
+                            _case = 62;
                         }
                         else
                         {
@@ -150,20 +153,28 @@ namespace JeuDeLOie
                         pion.ChangeCase(_case);
                         notDisplacedYet = false;
                     }
-
-                    if (!pion.IsDeplacing && !notDisplacedYet && !eventApplyed)
+                    
+                    if (!pion.IsMoving && !notDisplacedYet && nbCaseToGoBack > 0)
+                    {
+                        _case -= nbCaseToGoBack;
+                        nbCaseToGoBack = 0;
+                        pion.ChangeCase(_case);
+                    }
+                    
+                    if (!pion.IsMoving && !notDisplacedYet && !eventApplyed)
                     {
                         Evenements evenement = new Evenements(Game1.plate.Tab[_case].Evenement);
                         ApplyEvent(evenement);
                         eventApplyed = true;
                     }
 
-                    if (!pion.IsDeplacing && eventApplyed)
+                    if (!pion.IsMoving && eventApplyed)
                     {
                         Evenements evenement = new Evenements(Game1.plate.Tab[_case].Evenement);
                         if (evenement.E != Event.Nothing)
                         {
                             eventApplyed = false;
+                            pion.Update();
                             return false;
                         }
                         firstLaunchOfTurn = true;

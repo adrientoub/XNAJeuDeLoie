@@ -38,6 +38,8 @@ namespace JeuDeLOie
 
         bool isDeplacing;
         public bool IsDeplacing { get { return isDeplacing; } }
+        bool isMoving;
+        public bool IsMoving { get { return isMoving; } }
 
         #endregion
 
@@ -358,6 +360,8 @@ namespace JeuDeLOie
             {
                 ChangeCaseRecule(newcase);
             }
+
+            isMoving = isDeplacingAvance || isDeplacingRecule || retourDep;
         }
 
         // animation des pieds
@@ -378,6 +382,7 @@ namespace JeuDeLOie
             AnimationChangeCaseRecule();
 
             isDeplacing = isDeplacingAvance || isDeplacingRecule || retourDep;
+            isMoving = isDeplacing;
         }
 
         public void Draw()
